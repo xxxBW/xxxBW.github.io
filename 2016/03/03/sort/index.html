@@ -1,0 +1,745 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="摘要：关于排序和查找算法，以前我不是很重视，因为在做前端的时候很少会涉及到这些算法。但是后来发现其实排序和查找是算法的基础，所以这几天也整理了一下八大排序算法和两大查找算法的JavaScript实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八大排序+两大查找的JS实现">
+<meta property="og:url" content="http://xxxbw.github.io/2016/03/03/sort/index.html">
+<meta property="og:site_name" content="xxxBW's blog">
+<meta property="og:description" content="摘要：关于排序和查找算法，以前我不是很重视，因为在做前端的时候很少会涉及到这些算法。但是后来发现其实排序和查找是算法的基础，所以这几天也整理了一下八大排序算法和两大查找算法的JavaScript实现。">
+<meta property="og:updated_time" content="2016-03-07T12:43:29.362Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="八大排序+两大查找的JS实现">
+<meta name="twitter:description" content="摘要：关于排序和查找算法，以前我不是很重视，因为在做前端的时候很少会涉及到这些算法。但是后来发现其实排序和查找是算法的基础，所以这几天也整理了一下八大排序算法和两大查找算法的JavaScript实现。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 八大排序+两大查找的JS实现 | xxxBW's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">xxxBW's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                八大排序+两大查找的JS实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-03T13:31:40+08:00" content="2016-03-03">
+              2016-03-03
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/03/sort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/03/sort/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要：关于排序和查找算法，以前我不是很重视，因为在做前端的时候很少会涉及到这些算法。但是后来发现其实排序和查找是算法的基础，所以这几天也整理了一下八大排序算法和两大查找算法的JavaScript实现。<br><a id="more"></a></p>
+<h2 id="u5206_u7C7B"><a href="#u5206_u7C7B" class="headerlink" title="分类"></a>分类</h2><p>排序分为内部排序和外部排序，这里我们只介绍内部排序。</p>
+<h3 id="u516B_u5927_u6392_u5E8F_u7B97_u6CD5"><a href="#u516B_u5927_u6392_u5E8F_u7B97_u6CD5" class="headerlink" title="八大排序算法"></a>八大排序算法</h3><ol>
+<li>插入排序<ul>
+<li>直接插入排序</li>
+<li>希尔排序</li>
+</ul>
+</li>
+<li>选择排序<ul>
+<li>直接选择排序</li>
+<li>堆排序</li>
+</ul>
+</li>
+<li>交换排序<ul>
+<li>冒泡排序</li>
+<li>快速排序</li>
+</ul>
+</li>
+<li>归并排序</li>
+<li>基数排序</li>
+</ol>
+<h3 id="u4E24_u5927_u67E5_u627E_u7B97_u6CD5"><a href="#u4E24_u5927_u67E5_u627E_u7B97_u6CD5" class="headerlink" title="两大查找算法"></a>两大查找算法</h3><ol>
+<li>折半查找法</li>
+<li>二叉查找树查找法</li>
+</ol>
+<h2 id="u516B_u5927_u6392_u5E8F_u7B97_u6CD5-1"><a href="#u516B_u5927_u6392_u5E8F_u7B97_u6CD5-1" class="headerlink" title="八大排序算法"></a>八大排序算法</h2><h3 id="u63D2_u5165_u6392_u5E8F"><a href="#u63D2_u5165_u6392_u5E8F" class="headerlink" title="插入排序"></a>插入排序</h3><h4 id="u76F4_u63A5_u63D2_u5165_u6392_u5E8F"><a href="#u76F4_u63A5_u63D2_u5165_u6392_u5E8F" class="headerlink" title="直接插入排序"></a>直接插入排序</h4><blockquote>
+<p>思想：直接插入排序，就是在要排序的数组中，假设前面（n-1）位已经排好序了，然后把第n个数插入到前面的有序区中，也就实现了n个数排序。如此反复循环，知道数组排序完毕。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//直接插入排序</span><br><span class="line"><span class="keyword">function</span> dinsert(list)&#123;</span><br><span class="line">	//key用来保存当前正在比较的值</span><br><span class="line">	var len = list.length,key = null;</span><br><span class="line"></span><br><span class="line">	//i表示要执行轮次，即数组长度-<span class="number">1</span>，第一次把第一个数当成有序区</span><br><span class="line">	<span class="keyword">for</span>(var i = <span class="number">1</span>;i &lt; len;i++)&#123;</span><br><span class="line">		key = list[i];</span><br><span class="line">		//j表示有序区中的跟当前值比较的数</span><br><span class="line">		<span class="keyword">for</span>(var j = i-<span class="number">1</span>;j &gt;= <span class="number">0</span>;j--)&#123;</span><br><span class="line">			<span class="keyword">if</span>(list[j] &gt; key)&#123;</span><br><span class="line">				//list[j]比key大的，就把list[j]后移一位</span><br><span class="line">				list[j+<span class="number">1</span>] = list[j];</span><br><span class="line">				<span class="keyword">if</span>(j == <span class="number">0</span>)&#123;</span><br><span class="line">					list[j] = key;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="built_in">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		list[j+<span class="number">1</span>] = key;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="u5E0C_u5C14_u6392_u5E8F"><a href="#u5E0C_u5C14_u6392_u5E8F" class="headerlink" title="希尔排序"></a>希尔排序</h4><blockquote>
+<p>思想：希尔排序其实就是直接插入排序的一个优化算法，首先按某个增量d（n/2，n为要排序数组的个数），每组记录的下标相差d，对每组中的所有元素进行直接插入排序，然后再选择一个较小的增量d/2，再进行分组，每组进行直接插入排序，直到增量为1的时候，对整个数组进行直接插入排序后，排序完成。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 一趟希尔排序</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> shellInsert(list,dk) &#123;</span><br><span class="line">	var i,j,len=list.length,key=null;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; len - dk;i++) &#123;</span><br><span class="line">		// 将i+dk插入有序序列</span><br><span class="line">		<span class="keyword">if</span>(list[i+dk] &lt; list[i]) &#123;</span><br><span class="line">			key = list[i+dk];</span><br><span class="line">			j = i + dk;</span><br><span class="line">			<span class="keyword">do</span>&#123;</span><br><span class="line">				// 记录后移</span><br><span class="line">				j -=dk;</span><br><span class="line">				list[j+dk] = list[j];</span><br><span class="line">			&#125;<span class="keyword">while</span>(j-dk &gt; <span class="number">0</span> &amp;&amp; key &lt; list[j-dk]);</span><br><span class="line">			list[j] = key;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> shell2(list) &#123;</span><br><span class="line">	var group = null;</span><br><span class="line">	// group为增量，直到<span class="number">1</span>的时候排序结束</span><br><span class="line">	<span class="keyword">for</span>(group = Math.floor(list.length/<span class="number">2</span>);group &gt; <span class="number">0</span>; group = Math.floor(group/<span class="number">2</span>)) &#123;</span><br><span class="line">		shellInsert(list,group);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u9009_u62E9_u6392_u5E8F"><a href="#u9009_u62E9_u6392_u5E8F" class="headerlink" title="选择排序"></a>选择排序</h3><h4 id="u76F4_u63A5_u9009_u62E9_u6392_u5E8F"><a href="#u76F4_u63A5_u9009_u62E9_u6392_u5E8F" class="headerlink" title="直接选择排序"></a>直接选择排序</h4><blockquote>
+<p>思想：在要排序的数组中，选择最小的数与第一位交换，然后在剩下的数中找出最小的数与第二位交换，如此循环到倒数第二个数与倒数第一个数比较为止。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> choose(list) &#123;</span><br><span class="line">	var len = list.length,temp = null;</span><br><span class="line">	<span class="keyword">for</span> (var i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(var j = i + <span class="number">1</span>;j &lt; len;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(list[i] &gt; list[j]) &#123;</span><br><span class="line">				temp = list[i];</span><br><span class="line">				list[i] = list[j];</span><br><span class="line">				list[j] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="u5806_u6392_u5E8F"><a href="#u5806_u6392_u5E8F" class="headerlink" title="堆排序"></a>堆排序</h4><blockquote>
+<p>思想：堆排序是一种树形选择排序，是直接选择排序的有效改进。<br>  堆的定义：堆是一棵完全二叉树，并且n个有序序列（h1,h2,h3…,hn），其中（hi&gt;=h2i,hi&gt;=h2i+1）或（hi&lt;=h2i,hi&lt;=h2i+1），（i=1,2,3…,n/2）时称为堆，当堆顶的为最大项时为大顶堆，堆顶为最小项时为小顶堆。<br>  在堆排序中，我们首先要建立大顶堆，然后把堆顶与最后一个元素交换，然后再对前面n-1个数进行调整，使之成为大顶堆，依此类推，知道只有两个节点交换的堆。所以，在堆排序中，会用到两个函数，一个是建堆函数，一个是调用建堆函数实现排序的函数。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 交换函数</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> swap(list,i,j) &#123;</span><br><span class="line">	var temp = list[i];</span><br><span class="line">	list[i] = list[j];</span><br><span class="line">	list[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">* 建堆函数</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> buildMaxHeap(list,lastIndex) &#123;</span><br><span class="line">	<span class="keyword">for</span>(var i = Math.floor((lastIndex-<span class="number">1</span>)/<span class="number">2</span>);i &gt;= <span class="number">0</span>;i--) &#123;</span><br><span class="line">		// i为lastIndex的父节点</span><br><span class="line">		// k保存当前正在判断的节点</span><br><span class="line">		var k = i;</span><br><span class="line">		// 当k存在左节点时，即k存在子节点</span><br><span class="line">		<span class="keyword">while</span>(<span class="number">2</span>*k+<span class="number">1</span> &lt;= lastIndex) &#123;</span><br><span class="line">			// 暂时保存左节点的值到biggerIndex即最大值</span><br><span class="line">			var biggerIndex = <span class="number">2</span>*k+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(biggerIndex &lt; lastIndex) &#123;</span><br><span class="line">				// 当左节点不是最后的节点的时候</span><br><span class="line">				// 判断左右节点哪个大，把大的序号保存到biggerIndex</span><br><span class="line">				<span class="keyword">if</span>(list[biggerIndex] &lt; list[biggerIndex+<span class="number">1</span>]) &#123;</span><br><span class="line">					biggerIndex++;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(list[k] &lt; list[biggerIndex]) &#123;</span><br><span class="line">				// 比较父节点与左右节点最大值，把大值交换到父节点</span><br><span class="line">				// 交换后把k修改为biggerIndex，继续循环判断子节点</span><br><span class="line">				swap(list,k,biggerIndex);</span><br><span class="line">				k = biggerIndex;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="built_in">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">* 堆排序函数</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> heapSort(list)&#123;</span><br><span class="line">	var len = list.length;</span><br><span class="line">	<span class="keyword">for</span>(var i = <span class="number">0</span>;i &lt; len-<span class="number">1</span>;i++) &#123;</span><br><span class="line">		// 建堆，每次减去最后的数进行建堆</span><br><span class="line">		buildMaxHeap(list,len-<span class="number">1</span>-i);</span><br><span class="line">		swap(list,<span class="number">0</span>,len-<span class="number">1</span>-i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u4EA4_u6362_u6392_u5E8F"><a href="#u4EA4_u6362_u6392_u5E8F" class="headerlink" title="交换排序"></a>交换排序</h3><h4 id="u5192_u6CE1_u6392_u5E8F"><a href="#u5192_u6CE1_u6392_u5E8F" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><blockquote>
+<p>思路：对于待排数组list[n]<br>  1.list[0]与list[1]比较，把大的放到list[1]，然后list[1]与list[2]比较，把大的放到list[2]，依此类推，直到把最大的数放到list[n];<br>  2.与第一步同理，直到把最大的数放到list[n-1];<br>  3.最后直到list[0]与list[1]比较交换完成排序;</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> bubbling(list) &#123;</span><br><span class="line">	var len = list.length,temp;</span><br><span class="line">	// i表示本次冒泡参与的个数</span><br><span class="line">	<span class="keyword">for</span> (var i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">		// j表示交换的次数</span><br><span class="line">		<span class="keyword">for</span> (var j = <span class="number">0</span>;j &lt; i;j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(list[j] &gt; list[j+<span class="number">1</span>]) &#123;</span><br><span class="line">				temp = list[j];</span><br><span class="line">				list[j] = list[j+<span class="number">1</span>];</span><br><span class="line">				list[j+<span class="number">1</span>] = temp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="u5FEB_u901F_u6392_u5E8F"><a href="#u5FEB_u901F_u6392_u5E8F" class="headerlink" title="快速排序"></a>快速排序</h4><blockquote>
+<p>思路：选取一个基准，通常是第一个数或者最后一个数，通过一趟扫描把待排序列分成两部分，左边的比基准小，右边的比基准大，此时基准就位于正中间，也就是正确的位置，然后再用同样的方法递归左右两部分。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> quick(list) &#123;</span><br><span class="line">	// begin表示第一个数的序号，end表示最后一个数的序号</span><br><span class="line">	<span class="keyword">function</span> sort(begin,end) &#123;</span><br><span class="line">		var i = begin,</span><br><span class="line">			j = end,</span><br><span class="line">			// flag表示基准</span><br><span class="line">			flag = list[begin];</span><br><span class="line">		<span class="keyword">if</span>(begin &lt; end)&#123;</span><br><span class="line">			<span class="keyword">while</span>(i &lt; j) &#123;</span><br><span class="line">				// 从后开始向前扫描，找到比基准小的数，放到list[i]</span><br><span class="line">				<span class="keyword">for</span> (;i &lt; j;j--) &#123;</span><br><span class="line">					<span class="keyword">if</span>(list[j] &lt; flag) &#123;</span><br><span class="line">						list[i++] = list[j];</span><br><span class="line">						<span class="built_in">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// 再从前向后扫描，找到比基准大的数，放到list[j]</span><br><span class="line">				<span class="keyword">for</span>(;i &lt; j;i++) &#123;</span><br><span class="line">					<span class="keyword">if</span>(list[i] &gt; flag) &#123;</span><br><span class="line">						list[j--] = list[i];</span><br><span class="line">						<span class="built_in">break</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			// 最后i，j相同，所指向的位置就是flag的正确位置</span><br><span class="line">			list[i] = flag;</span><br><span class="line">			sort(<span class="number">0</span>,i-<span class="number">1</span>);</span><br><span class="line">			sort(i+<span class="number">1</span>,end);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(<span class="number">0</span>,list.length-<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>快排的优化方案：当同时找到比基准小的位置和比基准大的位置，再进行交换，三数取中，找出三个数中处于中间的数，效率会更高一点。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 交换函数</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> swap(list,i,j) &#123;</span><br><span class="line">	var temp = list[i];</span><br><span class="line">	list[i] = list[j];</span><br><span class="line">	list[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">* 三数取中,把中间的数放到start中</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> chooseMiddle(list,start,middle,end) &#123;</span><br><span class="line">	// 最后为中，小，大；</span><br><span class="line">	<span class="keyword">if</span>(list == null &amp;&amp; list.length == <span class="number">0</span>) &#123;</span><br><span class="line">		console.log(<span class="string">"list error"</span>);</span><br><span class="line">		<span class="built_in">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	var middleNum = list[start];</span><br><span class="line">	<span class="keyword">if</span>(list[middle] &gt; list[end]) &#123;</span><br><span class="line">		swap(list,middle,end);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(list[start] &gt; list[end]) &#123;</span><br><span class="line">		swap(list,start,end);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(list[middle] &gt; list[start]) &#123;</span><br><span class="line">		swap(list,start,middle);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> quick2(list,start,end) &#123;</span><br><span class="line">	var mid = Math.floor(((end-start+<span class="number">1</span>)/<span class="number">2</span>)+start);</span><br><span class="line">	chooseMiddle(list,start,mid,end);</span><br><span class="line">	var flag = list[start],</span><br><span class="line">		i = start,</span><br><span class="line">		j = end+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(start &lt; end)&#123;</span><br><span class="line">		<span class="keyword">while</span>(i &lt; j) &#123;</span><br><span class="line">			// 从前向后找，找到比基准大的数</span><br><span class="line">			<span class="keyword">while</span>(i &lt; end &amp;&amp; list[++i] &lt;= flag);</span><br><span class="line">			// 从后向前找，找到比基准小的数</span><br><span class="line">			<span class="keyword">while</span>(j &gt; start &amp;&amp; list[--j] &gt;= flag);</span><br><span class="line">			// 交换两个数</span><br><span class="line">			<span class="keyword">if</span>(i &lt; j) &#123;</span><br><span class="line">				swap(list,i,j);</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="built_in">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		swap(list,start,j);</span><br><span class="line">		quick2(list,start,j);</span><br><span class="line">		quick2(list,j+<span class="number">1</span>,end);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> quickSort2(list) &#123;</span><br><span class="line">	quick2(list,<span class="number">0</span>,list.length-<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u5F52_u5E76_u6392_u5E8F"><a href="#u5F52_u5E76_u6392_u5E8F" class="headerlink" title="归并排序"></a>归并排序</h3><blockquote>
+<p>思路：将两个或两个以上的有序表合并成一个新的有序表，即把待排序列分成若干个子序列，每个子序列都是有序的，然后再把有序的子序列合并成整体有序序列。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 归并排序</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> merge(left,right)&#123;</span><br><span class="line">	var result = [];</span><br><span class="line">	<span class="keyword">while</span>(left.length &gt; <span class="number">0</span> &amp;&amp; right.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (left[<span class="number">0</span>] &lt; right[<span class="number">0</span>]) &#123;</span><br><span class="line">			result.push(left.shift());</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			result.push(right.shift());</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	result = result.concat(left,right);</span><br><span class="line">	<span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">* 对数组进行拆分</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> mergeSort(list)&#123;</span><br><span class="line">	// 当数组只有一个元素的时候就返回该数组</span><br><span class="line">	<span class="keyword">if</span>(list.length == <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="built_in">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	// 否则把数组分成左右两部分</span><br><span class="line">	var middle = Math.floor(list.length/<span class="number">2</span>);</span><br><span class="line">	var left = list.slice(<span class="number">0</span>,middle),</span><br><span class="line">		right = list.slice(middle);</span><br><span class="line">	// 对左右两边进行拆分后进行归并排序</span><br><span class="line">	<span class="built_in">return</span> merge(mergeSort(left),mergeSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u57FA_u6570_u6392_u5E8F"><a href="#u57FA_u6570_u6392_u5E8F" class="headerlink" title="基数排序"></a>基数排序</h3><blockquote>
+<p>思路：将所有的待比较序列统一为同样的数字长度，然后从最低位开始，一次进行一次排序，这样，从最低位一直排到最高位以后，就变成了一个有序序列。</p>
+</blockquote>
+<h2 id="u4E24_u5927_u67E5_u627E_u7B97_u6CD5-1"><a href="#u4E24_u5927_u67E5_u627E_u7B97_u6CD5-1" class="headerlink" title="两大查找算法"></a>两大查找算法</h2><h3 id="u6298_u534A_u67E5_u627E_u6CD5_uFF08_u4E8C_u5206_u67E5_u627E_u6CD5_uFF09"><a href="#u6298_u534A_u67E5_u627E_u6CD5_uFF08_u4E8C_u5206_u67E5_u627E_u6CD5_uFF09" class="headerlink" title="折半查找法（二分查找法）"></a>折半查找法（二分查找法）</h3><blockquote>
+<p>思路：折半查找算法要求查找表的数据是线性结构存储，还要求查找表中的顺序是由小到大排序（由大到小排序）。首先设两个标志，low和height，表示最低索引和最高索引，然后取中间位置索引middle，判断middle处的值是否与所要查找的数相同，相同则结束查找，middle处的值比所要查找的值小就把low设为middle+1，如果middle处的值比所要查找的值大就把height设为middle-1，然后再新区间继续查到，直到找到或者low&gt;height找不到所要查找的值结束查找。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 折半查找法</span><br><span class="line">*/</span><br><span class="line"><span class="keyword">function</span> binarySearch(list,key,low,height) &#123;</span><br><span class="line">	var mid = Math.floor((low+height)/<span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span> (low &gt; height) &#123;</span><br><span class="line">		console.log(<span class="string">'查找失败！'</span>);</span><br><span class="line">		<span class="built_in">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(list[mid] == key) &#123;</span><br><span class="line">		// 找到要查找的值</span><br><span class="line">		<span class="built_in">return</span> mid;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(list[mid] &lt; key) &#123;</span><br><span class="line">		// 所要查找的值比中间值大</span><br><span class="line">		low = mid + <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">return</span> binarySearch(list,key,low,height);</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(list[mid] &gt; key) &#123;</span><br><span class="line">		// 所要查找的值比中间值小</span><br><span class="line">		height = mid - <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">return</span> binarySearch(list,key,low,height);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> B<span class="keyword">in</span>Search(list,key) &#123;</span><br><span class="line">	var result = null;</span><br><span class="line">	result = binarySearch(list,key,<span class="number">0</span>,list.length-<span class="number">1</span>);</span><br><span class="line">	console.log(<span class="string">'查找结果：'</span>+result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u4E8C_u53C9_u67E5_u627E_u6811_u67E5_u627E_u6CD5"><a href="#u4E8C_u53C9_u67E5_u627E_u6811_u67E5_u627E_u6CD5" class="headerlink" title="二叉查找树查找法"></a>二叉查找树查找法</h3><blockquote>
+<p>思路：首先先来讲一下二叉查找树的定义，如下<br>  1.如果根节点的左子树非空，则左子树所有节点的值小于根节点；<br>  2.如果根节点的右子树非空，则右子树所有节点的值大于根节点；<br>  3.左右子树分别为一棵二叉树；<br>  二叉查找树的查找：若二叉查找树为空，则查找失败，若所要查找的值等于根节点的值，则查找成功，若给定值下于根节点的值，则继续在左子树递归查找，若给定值大于根节点的值，则继续在右子树上递归查找。</p>
+</blockquote>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/06/learn-hexo/" rel="next" title="hexo+github构建自己的Blog">
+                <i class="fa fa-chevron-left"></i> hexo+github构建自己的Blog
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/03/sort/"
+           data-title="八大排序+两大查找的JS实现" data-url="http://xxxbw.github.io/2016/03/03/sort/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="xxxBW" />
+          <p class="site-author-name" itemprop="name">xxxBW</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5206_u7C7B"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u516B_u5927_u6392_u5E8F_u7B97_u6CD5"><span class="nav-number">1.1.</span> <span class="nav-text">八大排序算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E24_u5927_u67E5_u627E_u7B97_u6CD5"><span class="nav-number">1.2.</span> <span class="nav-text">两大查找算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u516B_u5927_u6392_u5E8F_u7B97_u6CD5-1"><span class="nav-number">2.</span> <span class="nav-text">八大排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u63D2_u5165_u6392_u5E8F"><span class="nav-number">2.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u76F4_u63A5_u63D2_u5165_u6392_u5E8F"><span class="nav-number">2.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u5E0C_u5C14_u6392_u5E8F"><span class="nav-number">2.1.2.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u9009_u62E9_u6392_u5E8F"><span class="nav-number">2.2.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u76F4_u63A5_u9009_u62E9_u6392_u5E8F"><span class="nav-number">2.2.1.</span> <span class="nav-text">直接选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u5806_u6392_u5E8F"><span class="nav-number">2.2.2.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EA4_u6362_u6392_u5E8F"><span class="nav-number">2.3.</span> <span class="nav-text">交换排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u5192_u6CE1_u6392_u5E8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u5FEB_u901F_u6392_u5E8F"><span class="nav-number">2.3.2.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F52_u5E76_u6392_u5E8F"><span class="nav-number">2.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u57FA_u6570_u6392_u5E8F"><span class="nav-number">2.5.</span> <span class="nav-text">基数排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E24_u5927_u67E5_u627E_u7B97_u6CD5-1"><span class="nav-number">3.</span> <span class="nav-text">两大查找算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u6298_u534A_u67E5_u627E_u6CD5_uFF08_u4E8C_u5206_u67E5_u627E_u6CD5_uFF09"><span class="nav-number">3.1.</span> <span class="nav-text">折半查找法（二分查找法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4E8C_u53C9_u67E5_u627E_u6811_u67E5_u627E_u6CD5"><span class="nav-number">3.2.</span> <span class="nav-text">二叉查找树查找法</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xxxBW</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xxxBW"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>
