@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="BFC,CSS," />
+  <meta name="keywords" content="HTTPS,SSL," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="摘要：BFC，这个词很久之前就已经听说过，知道是块级格式上下文，其他的就不清楚了。这段时间看了一些关于BFC的文章之后，对于BFC也有所认识，跟大家分享一下我对BFC的理解。">
+<meta name="description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈BFC">
-<meta property="og:url" content="http://xxxbw.github.io/2016/03/20/BFC/index.html">
+<meta property="og:title" content="about HTTPS and SSL">
+<meta property="og:url" content="http://xxxbw.github.io/2016/03/20/HTTP/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
-<meta property="og:description" content="摘要：BFC，这个词很久之前就已经听说过，知道是块级格式上下文，其他的就不清楚了。这段时间看了一些关于BFC的文章之后，对于BFC也有所认识，跟大家分享一下我对BFC的理解。">
-<meta property="og:updated_time" content="2016-03-20T06:06:58.012Z">
+<meta property="og:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta property="og:updated_time" content="2016-03-20T09:20:13.851Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈BFC">
-<meta name="twitter:description" content="摘要：BFC，这个词很久之前就已经听说过，知道是块级格式上下文，其他的就不清楚了。这段时间看了一些关于BFC的文章之后，对于BFC也有所认识，跟大家分享一下我对BFC的理解。">
+<meta name="twitter:title" content="about HTTPS and SSL">
+<meta name="twitter:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> 浅谈BFC | xxxBW's blog </title>
+  <title> about HTTPS and SSL | xxxBW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -202,7 +202,7 @@
             
             
               
-                浅谈BFC
+                about HTTPS and SSL
               
             
           </h1>
@@ -214,7 +214,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T13:54:51+08:00" content="2016-03-20">
+            <time itemprop="dateCreated" datetime="2016-03-20T16:58:09+08:00" content="2016-03-20">
               2016-03-20
             </time>
           </span>
@@ -225,8 +225,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/BFC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/BFC/" itemprop="commentsCount"></span>
+                <a href="/2016/03/20/HTTP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/HTTP/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -247,83 +247,52 @@
       
 
       
-        <p>摘要：BFC，这个词很久之前就已经听说过，知道是块级格式上下文，其他的就不清楚了。这段时间看了一些关于BFC的文章之后，对于BFC也有所认识，跟大家分享一下我对BFC的理解。<br><a id="more"></a></p>
-<h2 id="u89C6_u89C9_u683C_u5F0F_u5316_u6A21_u578B"><a href="#u89C6_u89C9_u683C_u5F0F_u5316_u6A21_u578B" class="headerlink" title="视觉格式化模型"></a>视觉格式化模型</h2><p>在谈BFC之前先介绍一下视觉格式化模型</p>
-<blockquote>
-<p> 定义：视觉格式化模型(visual formatting model)是用来处理文档并将它显示在视觉媒体上的机制。这是 CSS 的一个基础概念。 视觉格式化模型根据 CSS 盒模型为文档的每个元素生成 0，1 或多个盒。</p>
+        <p>摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？<br><a id="more"></a><br>首先我们来看下HTTP的解释</p>
+<h2 id="HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTP（超文本传输协议）"></a>HTTP（超文本传输协议）</h2><blockquote>
+<p>超文本传输协议，是客户端和服务器请求和应答的标准，用于服务器传输超文本到本地浏览器。</p>
 </blockquote>
-<p>盒的渲染是相对于它的包含块（后代元素）边界的渲染，当布局跑到 包含块的外面时，则出现了溢出（overflow）。</p>
-<h3 id="u76D2_u7C7B_u578B"><a href="#u76D2_u7C7B_u578B" class="headerlink" title="盒类型"></a>盒类型</h3><blockquote>
-<p>视觉格式化模型的一部分工作是从文档元素生成盒。生成盒的类型由display决定。</p>
+<p>那么HTTPS又是什么呢？</p>
+<h2 id="HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTPS（安全超文本传输协议）"></a>HTTPS（安全超文本传输协议）</h2><blockquote>
+<p>HTTPS是HTTP的安全版，在HTTP下加入了SSL层，SSL是安全的基础，用于加密详细内容，HTTPS存在一个与HTTP不同的默认端口和一个加密/身份验证层（介于TCP个HTTP之间）。</p>
 </blockquote>
-<h4 id="1-_u5757_u76D2"><a href="#1-_u5757_u76D2" class="headerlink" title="1.块盒"></a>1.块盒</h4><blockquote>
-<p> display为block,table,list-item</p>
+<p>很多情况下，我们会被问到HTTP与HTTPS的不同，到底有什么不同呢？我们一个一个来看。</p>
+<h2 id="HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><a href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C" class="headerlink" title="HTTP与HTTPS的不同"></a>HTTP与HTTPS的不同</h2><ol>
+<li>HTTPS需要到CA机构申请证书，一般证书很少免费，需要交费，用于证明服务器用途类型，客户端通过信任证书，从而信任主机</li>
+<li>HTTP的端口是80，HTTPS的端口是443</li>
+<li>HTTP是超文本传输协议，信息是明文传输，HTTPS 则是具有安全性的SSL加密传输协议</li>
+<li>HTTP的链接简单，是无状态的，HTTPS是由SSL+HTTP协议构建的可进行加密传输，身份认证的网络协议，比HTTP安全</li>
+<li>HTTP速度比较快，HTTPS速度比较慢</li>
+</ol>
+<p>说完这些不同之后，这时，面试官可能会问，你说HTTPS比较慢，为什么它会比较慢呢？如果没有研究，那就真的一脸懵逼了。不怕，我们来看看HTTPS下的SSL。</p>
+<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><blockquote>
+<p>SSL是web浏览器和web服务器进行信息安全交换的协议</p>
 </blockquote>
+<p>提供的服务</p>
+<ul>
+<li>认证用户和服务器</li>
+<li>加密数据防止被窃取</li>
+<li>确保信息完整性（完整性检查）</li>
+</ul>
+<p>那么，我们进行HTTPS请求的时候会发生怎样的一个过程呢？此时发生的是SSL的一个握手过程。</p>
+<h2 id="SSL_u63E1_u624B_u8FC7_u7A0B"><a href="#SSL_u63E1_u624B_u8FC7_u7A0B" class="headerlink" title="SSL握手过程"></a>SSL握手过程</h2><p>假设客户端是A，服务器是B</p>
 <ol>
-<li>视觉上成块，竖着排列</li>
-<li>参与块级格式上下文（BFC）</li>
+<li>A告诉B自己的SSL版本信息，对称加密算法，密钥交换算法，摘要算法有哪些</li>
+<li>B根据A有的算法进行确定利用什么组合来进行通信并且把B的证书（名字和公钥）发送给A</li>
+<li>A根据自己已有的证书对B发来的证书进行真实性验证，有误则发出警告</li>
+<li>如果B需要验证A的真实性，也可以请求认证客户端，如果认证不通过，则结束会话（具体看客户端细节）</li>
+<li>A生成一个秘密消息per-master-secret（对称加密密钥、加密初始化向量、hmac的密钥）,并且用B的公钥加密，封装成ClientKeyExchange消息</li>
+<li>B用自己的私钥解密ClientKeyExchange，然后对秘密消息处理生成对称加密密钥、加密初始化向量、hmac的密钥，这时AB之间已经协商好如何对信息进行加密的方法了</li>
+<li>AB之间利用对称密钥算法进行信息传输</li>
 </ol>
-<h4 id="2-_u884C_u5185_u76D2"><a href="#2-_u884C_u5185_u76D2" class="headerlink" title="2.行内盒"></a>2.行内盒</h4><blockquote>
-<p> display为inline,inline-block,inline-table</p>
-</blockquote>
-<ol>
-<li>视觉上与其他行内元素上排列成行，横着排列</li>
-<li>参与行内格式上下文（IFC）</li>
-</ol>
-<h4 id="3-_u533F_u540D_u76D2"><a href="#3-_u533F_u540D_u76D2" class="headerlink" title="3.匿名盒"></a>3.匿名盒</h4><ol>
-<li>不能被选择器选中</li>
-<li>属性都是继承的或者初始默认值</li>
-</ol>
-<h3 id="u5B9A_u4F4D_u65B9_u6848"><a href="#u5B9A_u4F4D_u65B9_u6848" class="headerlink" title="定位方案"></a>定位方案</h3><blockquote>
-<p>定位方案的基本单位是盒，在了解BFC之前，我们先介绍定位方案以便我们后面 更好的理解BFC。</p>
-</blockquote>
-<h4 id="1-_u5E38_u89C4_u6D41"><a href="#1-_u5E38_u89C4_u6D41" class="headerlink" title="1.常规流"></a>1.常规流</h4><ol>
-<li>盒子一个接一个排列，在BFC中竖着排，在IFC中横着排</li>
-<li>position为static或relative会触发常规流</li>
-<li>float为none时会触发常规流</li>
-</ol>
-<h4 id="2-_u6D6E_u52A8"><a href="#2-_u6D6E_u52A8" class="headerlink" title="2.浮动"></a>2.浮动</h4><ol>
-<li>float不为none时会造成浮动</li>
-<li>脱离常规流，造成父元素塌陷，除非除浮动</li>
-<li>其他常规流围绕在它周边</li>
-</ol>
-<h4 id="3-_u7EDD_u5BF9_u5B9A_u4F4D"><a href="#3-_u7EDD_u5BF9_u5B9A_u4F4D" class="headerlink" title="3.绝对定位"></a>3.绝对定位</h4><ol>
-<li>position为abbsolute或fixed会造成绝对定位</li>
-<li>脱离常规流，对常规流没有影响</li>
-<li>定位相对于其他块</li>
-</ol>
-<h2 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h2><p>现在，我们对盒类型和定位方案有一定理解，接下来，我们就来说说BFC到底是什么。</p>
-<h3 id="u4EC0_u4E48_u662FBFC"><a href="#u4EC0_u4E48_u662FBFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h3><p>首先我们来看MDN的解释</p>
-<blockquote>
-<p>A block formatting context is a part of a visual CSS rendering of a Web page. It is the region in which the layout of block boxes occurs and in which floats interact with each other.<br>块级格式上下文是CSS渲染的一部分。决定块盒的布局以及浮动的相互影响。</p>
-</blockquote>
-<h3 id="u5982_u4F55_u521B_u5EFABFC"><a href="#u5982_u4F55_u521B_u5EFABFC" class="headerlink" title="如何创建BFC"></a>如何创建BFC</h3><p>那么如果我们要使用BFC，我们要怎么做呢？首先要创建BFC。我们来看一下MDN怎么解释。</p>
-<blockquote>
-<p>the root element or something that contains it<br>  floats (elements where float is not none)<br>  absolutely positioned elements (elements where position is absolute or fixed)<br>  inline-blocks (elements with display: inline-block)<br>  table cells (elements with display: table-cell, which is the default for HTML table cells)<br>  table captions (elements with display: table-caption, which is the default for HTML table captions)<br>  elements where overflow has a value other than visible<br>  flex boxes (elements with display: flex or inline-flex)</p>
-</blockquote>
-<p>其实，我们刚才在说盒类型的时候，就有提到过，现在我们来看看MDN的解，其实看关键字基本就知道了。</p>
-<ol>
-<li>根元素或者包含根元素的元素</li>
-<li>float不为none的元素</li>
-<li>position为absolute或fixed的元素</li>
-<li>display: inline-block的元素</li>
-<li>display: table-cell的元素</li>
-<li>display: table-caption的元素</li>
-<li>overflow不为visible的元素</li>
-<li>flex box弹性盒子（CSS3）</li>
-</ol>
-<h3 id="BFC_u7684_u8FB9_u754C"><a href="#BFC_u7684_u8FB9_u754C" class="headerlink" title="BFC的边界"></a>BFC的边界</h3><p>在我们以前的编程习惯中，看到这里大概会以为一个元素可以在多个BFC中，其实并不是。看看这里的解释。</p>
-<blockquote>
-<p>A block formatting context contains everything inside of the element creating it that is not also inside a descendant element that creates a new block formatting context.<br>一个BFC包含创建该上下文的所有子元素，但是不包括创建BFC的子元素的所有子元素。这句话说明了一个点，就是一个元素只能存在你一个BFC中。</p>
-</blockquote>
-<h3 id="BFC_u7684_u7279_u6027"><a href="#BFC_u7684_u7279_u6027" class="headerlink" title="BFC的特性"></a>BFC的特性</h3><ol>
-<li>BFC内部元素一个一个竖着排列</li>
-<li>BFC内部与外部是隔绝的，不相互影响</li>
-<li>每个元素的margin box左边与容器的border box左边相接触</li>
-<li>BFC的高度包含浮动元素，不会造父元素塌陷 </li>
-</ol>
-<p>了解了BFC之后，我们就可以利用BFC进行布局，而且对整个布局的理解更加深刻~</p>
-<p>参考：<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Visual_formatting_model" target="_blank" rel="external">视觉格式化模型|MDN</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context" target="_blank" rel="external">Block formatting context|MDN</a></p>
+<p>关于SSL的握手过程，以下几点说明看一下应该会更加理解SSL的握手过程~</p>
+<ul>
+<li>对称加密算法是利用相同的密钥进行加密解密</li>
+<li>非对称密钥算法是是利用公钥和私钥进行加密解密，如果利用公钥进行加密，那么只能利用私钥进行解密，如果利用私钥进行加密，那么只能利用公钥进行加密</li>
+<li>SSL 过程中私钥只有B（服务器）拥有</li>
+<li>SSL的过程其实是非对称加密算法与对称加密算法的结合使用，首先利用非对称加密算法协商对称加密算法的密钥，协商完成后再利用对称加密算法进行信息传输</li>
+<li>对称加密密钥用于信息加密、加密初始化向量用于分组密文算法、hmac的密钥用于信息完整性检查</li>
+</ul>
+<p>理解了HTTPS的SSL握手后，相信对HTTPS的理解更加深刻，以后再也不会一脸懵逼啦~</p>
 
       
     </div>
@@ -332,9 +301,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/BFC/" rel="tag">#BFC</a>
+            <a href="/tags/HTTPS/" rel="tag">#HTTPS</a>
           
-            <a href="/tags/CSS/" rel="tag">#CSS</a>
+            <a href="/tags/SSL/" rel="tag">#SSL</a>
           
         </div>
       
@@ -343,17 +312,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/03/sort/" rel="next" title="八大排序+两大查找的JS实现">
-                <i class="fa fa-chevron-left"></i> 八大排序+两大查找的JS实现
+              <a href="/2016/03/20/BFC/" rel="next" title="浅谈BFC">
+                <i class="fa fa-chevron-left"></i> 浅谈BFC
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/20/HTTP/" rel="prev" title="about HTTPS and SSL">
-                about HTTPS and SSL <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -379,8 +344,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/BFC/"
-           data-title="浅谈BFC" data-url="http://xxxbw.github.io/2016/03/20/BFC/">
+      <div class="ds-thread" data-thread-key="2016/03/20/HTTP/"
+           data-title="about HTTPS and SSL" data-url="http://xxxbw.github.io/2016/03/20/HTTP/">
       </div>
     
   </div>
@@ -468,7 +433,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u89C6_u89C9_u683C_u5F0F_u5316_u6A21_u578B"><span class="nav-number">1.</span> <span class="nav-text">视觉格式化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u76D2_u7C7B_u578B"><span class="nav-number">1.1.</span> <span class="nav-text">盒类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_u5757_u76D2"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.块盒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_u884C_u5185_u76D2"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.行内盒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_u533F_u540D_u76D2"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.匿名盒</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B9A_u4F4D_u65B9_u6848"><span class="nav-number">1.2.</span> <span class="nav-text">定位方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-_u5E38_u89C4_u6D41"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.常规流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-_u6D6E_u52A8"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.浮动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-_u7EDD_u5BF9_u5B9A_u4F4D"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.绝对定位</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC"><span class="nav-number">2.</span> <span class="nav-text">BFC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#u4EC0_u4E48_u662FBFC"><span class="nav-number">2.1.</span> <span class="nav-text">什么是BFC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5982_u4F55_u521B_u5EFABFC"><span class="nav-number">2.2.</span> <span class="nav-text">如何创建BFC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC_u7684_u8FB9_u754C"><span class="nav-number">2.3.</span> <span class="nav-text">BFC的边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC_u7684_u7279_u6027"><span class="nav-number">2.4.</span> <span class="nav-text">BFC的特性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">1.</span> <span class="nav-text">HTTP（超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">2.</span> <span class="nav-text">HTTPS（安全超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><span class="nav-number">3.</span> <span class="nav-text">HTTP与HTTPS的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL"><span class="nav-number">4.</span> <span class="nav-text">SSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL_u63E1_u624B_u8FC7_u7A0B"><span class="nav-number">5.</span> <span class="nav-text">SSL握手过程</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
