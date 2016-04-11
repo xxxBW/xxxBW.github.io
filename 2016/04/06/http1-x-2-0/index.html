@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTPS,SSL,计算机网络," />
+  <meta name="keywords" content="HTTP,计算机网络," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta name="description" content="摘要：关于HTTP，以前的时候只知道HTTP是一个应用层的协议，到底HTTP有什么功能？其实并不了解。在面试中遇到过这种题目–从页面输入一个url到显示页面会发生什么事情？当时跟实验室的师兄聊过，跟他说了我的答案，然后他就问我怎么不说HTTP1.1的持久连接呢？当时我一脸懵逼，持久连接是什么鬼？赶紧HTTP的知识补起来~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="about HTTPS and SSL">
-<meta property="og:url" content="http://xxxbw.github.io/2016/03/20/HTTP/index.html">
+<meta property="og:title" content="HTTP1.1 vs HTTP2.0">
+<meta property="og:url" content="http://xxxbw.github.io/2016/04/06/http1-x-2-0/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
-<meta property="og:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
-<meta property="og:updated_time" content="2016-04-06T12:11:22.042Z">
+<meta property="og:description" content="摘要：关于HTTP，以前的时候只知道HTTP是一个应用层的协议，到底HTTP有什么功能？其实并不了解。在面试中遇到过这种题目–从页面输入一个url到显示页面会发生什么事情？当时跟实验室的师兄聊过，跟他说了我的答案，然后他就问我怎么不说HTTP1.1的持久连接呢？当时我一脸懵逼，持久连接是什么鬼？赶紧HTTP的知识补起来~">
+<meta property="og:updated_time" content="2016-04-06T12:11:09.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about HTTPS and SSL">
-<meta name="twitter:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta name="twitter:title" content="HTTP1.1 vs HTTP2.0">
+<meta name="twitter:description" content="摘要：关于HTTP，以前的时候只知道HTTP是一个应用层的协议，到底HTTP有什么功能？其实并不了解。在面试中遇到过这种题目–从页面输入一个url到显示页面会发生什么事情？当时跟实验室的师兄聊过，跟他说了我的答案，然后他就问我怎么不说HTTP1.1的持久连接呢？当时我一脸懵逼，持久连接是什么鬼？赶紧HTTP的知识补起来~">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> about HTTPS and SSL | xxxBW's blog </title>
+  <title> HTTP1.1 vs HTTP2.0 | xxxBW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -202,7 +202,7 @@
             
             
               
-                about HTTPS and SSL
+                HTTP1.1 vs HTTP2.0
               
             
           </h1>
@@ -214,8 +214,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T16:58:09+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-04-06T18:52:41+08:00" content="2016-04-06">
+              2016-04-06
             </time>
           </span>
 
@@ -225,8 +225,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/HTTP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/HTTP/" itemprop="commentsCount"></span>
+                <a href="/2016/04/06/http1-x-2-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/http1-x-2-0/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -247,52 +247,52 @@
       
 
       
-        <p>摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？<br><a id="more"></a><br>首先我们来看下HTTP的解释</p>
-<h2 id="HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTP（超文本传输协议）"></a>HTTP（超文本传输协议）</h2><blockquote>
-<p>超文本传输协议，是客户端和服务器请求和应答的标准，用于服务器传输超文本到本地浏览器。</p>
-</blockquote>
-<p>那么HTTPS又是什么呢？</p>
-<h2 id="HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTPS（安全超文本传输协议）"></a>HTTPS（安全超文本传输协议）</h2><blockquote>
-<p>HTTPS是HTTP的安全版，在HTTP下加入了SSL层，SSL是安全的基础，用于加密详细内容，HTTPS存在一个与HTTP不同的默认端口和一个加密/身份验证层（介于TCP个HTTP之间）。</p>
-</blockquote>
-<p>很多情况下，我们会被问到HTTP与HTTPS的不同，到底有什么不同呢？我们一个一个来看。</p>
-<h2 id="HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><a href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C" class="headerlink" title="HTTP与HTTPS的不同"></a>HTTP与HTTPS的不同</h2><ol>
-<li>HTTPS需要到CA机构申请证书，一般证书很少免费，需要交费，用于证明服务器用途类型，客户端通过信任证书，从而信任主机</li>
-<li>HTTP的端口是80，HTTPS的端口是443</li>
-<li>HTTP是超文本传输协议，信息是明文传输，HTTPS 则是具有安全性的SSL加密传输协议</li>
-<li>HTTP的链接简单，是无状态的，HTTPS是由SSL+HTTP协议构建的可进行加密传输，身份认证的网络协议，比HTTP安全</li>
-<li>HTTP速度比较快，HTTPS速度比较慢</li>
-</ol>
-<p>说完这些不同之后，这时，面试官可能会问，你说HTTPS比较慢，为什么它会比较慢呢？如果没有研究，那就真的一脸懵逼了。不怕，我们来看看HTTPS下的SSL。</p>
-<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><blockquote>
-<p>SSL是web浏览器和web服务器进行信息安全交换的协议</p>
-</blockquote>
-<p>提供的服务</p>
-<ul>
-<li>认证用户和服务器</li>
-<li>加密数据防止被窃取</li>
-<li>确保信息完整性（完整性检查）</li>
+        <p>摘要：关于HTTP，以前的时候只知道HTTP是一个应用层的协议，到底HTTP有什么功能？其实并不了解。在面试中遇到过这种题目–从页面输入一个url到显示页面会发生什么事情？当时跟实验室的师兄聊过，跟他说了我的答案，然后他就问我怎么不说HTTP1.1的持久连接呢？当时我一脸懵逼，持久连接是什么鬼？赶紧HTTP的知识补起来~<br><a id="more"></a></p>
+<h2 id="HTTP_u53D1_u5C55_u53F2"><a href="#HTTP_u53D1_u5C55_u53F2" class="headerlink" title="HTTP发展史"></a>HTTP发展史</h2><ul>
+<li>HTTP0.9<br>只有一行请求，包括请求方法和路径，响应也只是一个HTML</li>
+<li>HTTP1.0<br>请求行包括请求版本和首部<br>响应行包括响应状态和首部<br>响应对象可以包含任何类型，包括HTML、纯文本文件、图片或其他类型<br>内容编码、字符集支持、多部分类型、认证、缓存、代理行为、日期格式</li>
+<li>HTTP1.1<br>持久连接</li>
+<li>HTTP2.0<br>二进制分帧层</li>
 </ul>
-<p>那么，我们进行HTTPS请求的时候会发生怎样的一个过程呢？此时发生的是SSL的一个握手过程。</p>
-<h2 id="SSL_u63E1_u624B_u8FC7_u7A0B"><a href="#SSL_u63E1_u624B_u8FC7_u7A0B" class="headerlink" title="SSL握手过程"></a>SSL握手过程</h2><p>假设客户端是A，服务器是B</p>
-<ol>
-<li>A告诉B自己的SSL版本信息，对称加密算法，密钥交换算法，摘要算法有哪些</li>
-<li>B根据A有的算法进行确定利用什么组合来进行通信并且把B的证书（名字和公钥）发送给A</li>
-<li>A根据自己已有的证书对B发来的证书进行真实性验证，有误则发出警告</li>
-<li>如果B需要验证A的真实性，也可以请求认证客户端，如果认证不通过，则结束会话（具体看客户端细节）</li>
-<li>A生成一个秘密消息per-master-secret（对称加密密钥、加密初始化向量、hmac的密钥）,并且用B的公钥加密，封装成ClientKeyExchange消息</li>
-<li>B用自己的私钥解密ClientKeyExchange，然后对秘密消息处理生成对称加密密钥、加密初始化向量、hmac的密钥，这时AB之间已经协商好如何对信息进行加密的方法了</li>
-<li>AB之间利用对称密钥算法进行信息传输</li>
-</ol>
-<p>关于SSL的握手过程，以下几点说明看一下应该会更加理解SSL的握手过程~</p>
+<h2 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h2><blockquote>
+<p>HTTP1.1增加了挺多HTTP1.0没有的功能，达到更好的优化，减少延迟，那么HTTP1.1增加的功能有哪些呢？看看下面这些新功能</p>
+</blockquote>
+<h3 id="1-_u6301_u4E45_u8FDE_u63A5"><a href="#1-_u6301_u4E45_u8FDE_u63A5" class="headerlink" title="1.持久连接"></a>1.持久连接</h3><p>HTTP1.0的时候每完成一次请求响应后，TCP连接都会关闭，再次发起HTTP请求的时候又到重新建立TCP连接，每次建立TCP连接时进行TCP三次握手，当一个页面有几十个请求时，带来的延迟可想而知。持久连接就是针对这个问题而建立的，当TCP连接后不关闭，避免多次连接进行TCP三次握手造成的延迟。</p>
+<h3 id="2-HTTP_u7BA1_u9053"><a href="#2-HTTP_u7BA1_u9053" class="headerlink" title="2.HTTP管道"></a>2.HTTP管道</h3><p>HTTP请求队列是先进先出的（FIFO），发送第一个请求，等待响应，然后再发送第二个请求，此时需要等待一次往返时间再进行请求，这个时间段服务器是空闲的，使用HTTP管道把FIFO队列从客户端迁移到服务器上，处理完第一个请求后立即处理第二个请求。</p>
+<blockquote>
+<p>缺点：<br>  1.可能会造成TCP队首拥塞（请求队列是先进先出的，当第一个响应完全返回后第二个响应才能开始传输）<br>  2.现在支持HTTP管道的浏览器不多，通常是做为高级配置设置的</p>
+</blockquote>
+<h3 id="3-_u4F7F_u7528_u591A_u4E2ATCP_u8FDE_u63A5"><a href="#3-_u4F7F_u7528_u591A_u4E2ATCP_u8FDE_u63A5" class="headerlink" title="3.使用多个TCP连接"></a>3.使用多个TCP连接</h3><blockquote>
+<p>原因：浏览器并不支持多路复用（频分复用，时分复用）</p>
+</blockquote>
+<p>并行打开多个TCP连接（最多6个）可以增加一次发送的请求数量</p>
+<blockquote>
+<p>缺点：<br>  1.会占用更多的内存缓冲区和CPU<br>  2.竞争带宽</p>
+</blockquote>
+<h3 id="4-_u57DF_u540D_u5206_u533A"><a href="#4-_u57DF_u540D_u5206_u533A" class="headerlink" title="4.域名分区"></a>4.域名分区</h3><p>从不同的服务器下拿资源，增加并行请求数，一个域名最多可以建立6个TCP连接，那么分开在多个域名下加载的话就能实现并行加载更多文件，也可以将不同的域名映射到同个IP地址（因为浏览器连接限制的是主机名而不是IP地址）</p>
+<blockquote>
+<p>缺点：从不同服务器下拿资源会增加DNS的请求</p>
+</blockquote>
+<h3 id="5-_u8FDE_u63A5_u4E0E_u62FC_u5408"><a href="#5-_u8FDE_u63A5_u4E0E_u62FC_u5408" class="headerlink" title="5.连接与拼合"></a>5.连接与拼合</h3><p>把多个css和js组合为一个文件，正常在30-50k左右或者把多张图片拼合成雪碧图，连接与合并以减少HTTP的请求数</p>
+<h2 id="HTTP2-0"><a href="#HTTP2-0" class="headerlink" title="HTTP2.0"></a>HTTP2.0</h2><blockquote>
+<p>HTTP2.0跟HTTP1.x最大的不同是HTTP2.0新增了二进制分帧数据层，下面来看看HTTP2.0带来了什么变革吧~</p>
+</blockquote>
+<h3 id="1-_u4E8C_u8FDB_u5236_u5206_u5E27_u5C42"><a href="#1-_u4E8C_u8FDB_u5236_u5206_u5E27_u5C42" class="headerlink" title="1.二进制分帧层"></a>1.二进制分帧层</h3><p>HTTR1.x使用的是换行符作为纯文本的分隔符，而HTTP2.0将信息分割成更小的消息和帧，并且使用二进制格式进行编码，实现了客户端与服务器的安全通信。</p>
+<h3 id="2-_u6D41_u3001_u6D88_u606F_u3001_u5E27"><a href="#2-_u6D41_u3001_u6D88_u606F_u3001_u5E27" class="headerlink" title="2.流、消息、帧"></a>2.流、消息、帧</h3><p>HTTP2.0的新概念<br>流：已建立连接的双向字节流，是虚拟的通道，有唯一的标识符<br>消息：是指HTTP消息，包括HTTP请求消息和HTTP响应消息<br>帧：帧是最小的通信单位</p>
+<h3 id="3-_u591A_u5411_u8BF7_u6C42_u4E0E_u54CD_u5E94"><a href="#3-_u591A_u5411_u8BF7_u6C42_u4E0E_u54CD_u5E94" class="headerlink" title="3.多向请求与响应"></a>3.多向请求与响应</h3><p>由于HTTP2.0使用二进制分帧，所以请求与响应消息被分解为互不依赖的帧，然后乱序发送，最后再重新组合起来<br>实现了并行发送多个请求而且很好的解决了队首拥塞的问题</p>
+<h3 id="4-_u8BF7_u6C42_u4F18_u5148_u7EA7"><a href="#4-_u8BF7_u6C42_u4F18_u5148_u7EA7" class="headerlink" title="4.请求优先级"></a>4.请求优先级</h3><p>HTTP2.0提供了优先级的机制，让客户端和服务器根据优先级采取不同的策略，以最优的方法发送流、消息和帧，控制资源的分配</p>
+<h3 id="5-_u6BCF_u4E2A_u6765_u6E90_u4E00_u4E2A_u8FDE_u63A5"><a href="#5-_u6BCF_u4E2A_u6765_u6E90_u4E00_u4E2A_u8FDE_u63A5" class="headerlink" title="5.每个来源一个连接"></a>5.每个来源一个连接</h3><p>有了二进制分帧后，不需要多个TCP连接就能实现多流并行了，并且又是持久化连接，所以客户端与服务器之间只需要一个连接就够了</p>
+<h3 id="6-_u6D41_u91CF_u63A7_u5236"><a href="#6-_u6D41_u91CF_u63A7_u5236" class="headerlink" title="6.流量控制"></a>6.流量控制</h3><p>流量控制基于窗口更新帧进行，即接受方广播自己能接收多少个字节<br>流量控制窗口通过WINDOW_UPDATE帧更新<br>流量控制类似于TCP的拥塞窗口</p>
+<h3 id="7-_u670D_u52A1_u5668_u63A8_u9001"><a href="#7-_u670D_u52A1_u5668_u63A8_u9001" class="headerlink" title="7.服务器推送"></a>7.服务器推送</h3><p>客户端发送一个请求，服务器能给客户端多个响应<br>服务器推送技术典型的一个例子就是聊天室的实时更新，发送一个请求后服务器有新的消息时主动推送给前台，不用客户端定时请求</p>
+<h3 id="8-_u9996_u90E8_u538B_u7F29"><a href="#8-_u9996_u90E8_u538B_u7F29" class="headerlink" title="8.首部压缩"></a>8.首部压缩</h3><p>客户端和服务器使用“首部表”存储键-值对<br>第一次发送整个首部，之后根据首部表更新变化的键-值对</p>
+<h2 id="u9488_u5BF9HTTP2-0_u7684_u4F18_u5316"><a href="#u9488_u5BF9HTTP2-0_u7684_u4F18_u5316" class="headerlink" title="针对HTTP2.0的优化"></a>针对HTTP2.0的优化</h2><p>去掉HTTP1.x的优化                                                                           </p>
 <ul>
-<li>对称加密算法是利用相同的密钥进行加密解密</li>
-<li>非对称密钥算法是是利用公钥和私钥进行加密解密，如果利用公钥进行加密，那么只能利用私钥进行解密，如果利用私钥进行加密，那么只能利用公钥进行加密</li>
-<li>SSL 过程中私钥只有B（服务器）拥有</li>
-<li>SSL的过程其实是非对称加密算法与对称加密算法的结合使用，首先利用非对称加密算法协商对称加密算法的密钥，协商完成后再利用对称加密算法进行信息传输</li>
-<li>对称加密密钥用于信息加密、加密初始化向量用于分组密文算法、hmac的密钥用于信息完整性检查</li>
+<li>每个来源使用一个连接，所以不必使用多个TCP连接</li>
+<li>去掉连接和拼合，打包资源可能会造成缓存失效，占用内存，延缓执行</li>
+<li>利用HTTP2.0，很小的资源也可以并行发送</li>
+<li>嵌入资源也可以不用，因为HTTP2.0拥有服务器推送，利用服务器推送就可以实现一次请求多次响应</li>
 </ul>
-<p>理解了HTTPS的SSL握手后，相信对HTTPS的理解更加深刻，以后再也不会一脸懵逼啦~</p>
+<p>关于HTTP1.1和HTTP2.0的基础认知差不多就是这样啦~有什么不对的欢迎补充~</p>
 
       
     </div>
@@ -301,9 +301,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTTPS/" rel="tag">#HTTPS</a>
-          
-            <a href="/tags/SSL/" rel="tag">#SSL</a>
+            <a href="/tags/HTTP/" rel="tag">#HTTP</a>
           
             <a href="/tags/计算机网络/" rel="tag">#计算机网络</a>
           
@@ -314,17 +312,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/BFC/" rel="next" title="浅谈BFC">
-                <i class="fa fa-chevron-left"></i> 浅谈BFC
+              <a href="/2016/03/20/HTTP/" rel="next" title="about HTTPS and SSL">
+                <i class="fa fa-chevron-left"></i> about HTTPS and SSL
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/06/http1-x-2-0/" rel="prev" title="HTTP1.1 vs HTTP2.0">
-                HTTP1.1 vs HTTP2.0 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -350,8 +344,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/HTTP/"
-           data-title="about HTTPS and SSL" data-url="http://xxxbw.github.io/2016/03/20/HTTP/">
+      <div class="ds-thread" data-thread-key="2016/04/06/http1-x-2-0/"
+           data-title="HTTP1.1 vs HTTP2.0" data-url="http://xxxbw.github.io/2016/04/06/http1-x-2-0/">
       </div>
     
   </div>
@@ -439,7 +433,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">1.</span> <span class="nav-text">HTTP（超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">2.</span> <span class="nav-text">HTTPS（安全超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><span class="nav-number">3.</span> <span class="nav-text">HTTP与HTTPS的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL"><span class="nav-number">4.</span> <span class="nav-text">SSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL_u63E1_u624B_u8FC7_u7A0B"><span class="nav-number">5.</span> <span class="nav-text">SSL握手过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u53D1_u5C55_u53F2"><span class="nav-number">1.</span> <span class="nav-text">HTTP发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP1-1"><span class="nav-number">2.</span> <span class="nav-text">HTTP1.1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_u6301_u4E45_u8FDE_u63A5"><span class="nav-number">2.1.</span> <span class="nav-text">1.持久连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-HTTP_u7BA1_u9053"><span class="nav-number">2.2.</span> <span class="nav-text">2.HTTP管道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_u4F7F_u7528_u591A_u4E2ATCP_u8FDE_u63A5"><span class="nav-number">2.3.</span> <span class="nav-text">3.使用多个TCP连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-_u57DF_u540D_u5206_u533A"><span class="nav-number">2.4.</span> <span class="nav-text">4.域名分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_u8FDE_u63A5_u4E0E_u62FC_u5408"><span class="nav-number">2.5.</span> <span class="nav-text">5.连接与拼合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP2-0"><span class="nav-number">3.</span> <span class="nav-text">HTTP2.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_u4E8C_u8FDB_u5236_u5206_u5E27_u5C42"><span class="nav-number">3.1.</span> <span class="nav-text">1.二进制分帧层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_u6D41_u3001_u6D88_u606F_u3001_u5E27"><span class="nav-number">3.2.</span> <span class="nav-text">2.流、消息、帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_u591A_u5411_u8BF7_u6C42_u4E0E_u54CD_u5E94"><span class="nav-number">3.3.</span> <span class="nav-text">3.多向请求与响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-_u8BF7_u6C42_u4F18_u5148_u7EA7"><span class="nav-number">3.4.</span> <span class="nav-text">4.请求优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_u6BCF_u4E2A_u6765_u6E90_u4E00_u4E2A_u8FDE_u63A5"><span class="nav-number">3.5.</span> <span class="nav-text">5.每个来源一个连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-_u6D41_u91CF_u63A7_u5236"><span class="nav-number">3.6.</span> <span class="nav-text">6.流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-_u670D_u52A1_u5668_u63A8_u9001"><span class="nav-number">3.7.</span> <span class="nav-text">7.服务器推送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-_u9996_u90E8_u538B_u7F29"><span class="nav-number">3.8.</span> <span class="nav-text">8.首部压缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u9488_u5BF9HTTP2-0_u7684_u4F18_u5316"><span class="nav-number">4.</span> <span class="nav-text">针对HTTP2.0的优化</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
