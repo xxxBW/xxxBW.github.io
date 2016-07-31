@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTPS,SSL,计算机网络," />
+  <meta name="keywords" content="JavaScript,seajs," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta name="description" content="摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="about HTTPS and SSL">
-<meta property="og:url" content="http://xxxbw.github.io/2016/03/20/HTTP/index.html">
+<meta property="og:title" content="seajs-module">
+<meta property="og:url" content="http://xxxbw.github.io/2016/07/31/seajs-module/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
-<meta property="og:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
-<meta property="og:updated_time" content="2016-04-06T12:11:22.042Z">
+<meta property="og:description" content="摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~">
+<meta property="og:updated_time" content="2016-07-31T13:07:28.511Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about HTTPS and SSL">
-<meta name="twitter:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta name="twitter:title" content="seajs-module">
+<meta name="twitter:description" content="摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> about HTTPS and SSL | xxxBW's blog </title>
+  <title> seajs-module | xxxBW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -202,7 +202,7 @@
             
             
               
-                about HTTPS and SSL
+                seajs-module
               
             
           </h1>
@@ -214,8 +214,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T16:58:09+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-07-31T21:02:08+08:00" content="2016-07-31">
+              2016-07-31
             </time>
           </span>
 
@@ -225,8 +225,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/HTTP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/HTTP/" itemprop="commentsCount"></span>
+                <a href="/2016/07/31/seajs-module/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/31/seajs-module/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -236,7 +236,7 @@
 
            
           
-             <span id="/2016/03/20/HTTP/" class="leancloud_visitors" data-flag-title="about HTTPS and SSL">
+             <span id="/2016/07/31/seajs-module/" class="leancloud_visitors" data-flag-title="seajs-module">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -256,52 +256,133 @@
       
 
       
-        <p>摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？<br><a id="more"></a><br>首先我们来看下HTTP的解释</p>
-<h2 id="HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTP（超文本传输协议）"></a>HTTP（超文本传输协议）</h2><blockquote>
-<p>超文本传输协议，是客户端和服务器请求和应答的标准，用于服务器传输超文本到本地浏览器。</p>
-</blockquote>
-<p>那么HTTPS又是什么呢？</p>
-<h2 id="HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTPS（安全超文本传输协议）"></a>HTTPS（安全超文本传输协议）</h2><blockquote>
-<p>HTTPS是HTTP的安全版，在HTTP下加入了SSL层，SSL是安全的基础，用于加密详细内容，HTTPS存在一个与HTTP不同的默认端口和一个加密/身份验证层（介于TCP个HTTP之间）。</p>
-</blockquote>
-<p>很多情况下，我们会被问到HTTP与HTTPS的不同，到底有什么不同呢？我们一个一个来看。</p>
-<h2 id="HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><a href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C" class="headerlink" title="HTTP与HTTPS的不同"></a>HTTP与HTTPS的不同</h2><ol>
-<li>HTTPS需要到CA机构申请证书，一般证书很少免费，需要交费，用于证明服务器用途类型，客户端通过信任证书，从而信任主机</li>
-<li>HTTP的端口是80，HTTPS的端口是443</li>
-<li>HTTP是超文本传输协议，信息是明文传输，HTTPS 则是具有安全性的SSL加密传输协议</li>
-<li>HTTP的链接简单，是无状态的，HTTPS是由SSL+HTTP协议构建的可进行加密传输，身份认证的网络协议，比HTTP安全</li>
-<li>HTTP速度比较快，HTTPS速度比较慢</li>
-</ol>
-<p>说完这些不同之后，这时，面试官可能会问，你说HTTPS比较慢，为什么它会比较慢呢？如果没有研究，那就真的一脸懵逼了。不怕，我们来看看HTTPS下的SSL。</p>
-<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><blockquote>
-<p>SSL是web浏览器和web服务器进行信息安全交换的协议</p>
-</blockquote>
-<p>提供的服务</p>
-<ul>
-<li>认证用户和服务器</li>
-<li>加密数据防止被窃取</li>
-<li>确保信息完整性（完整性检查）</li>
+        <p>摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~<br><a id="more"></a></p>
+<h2 id="u4E3A_u4EC0_u4E48_u8981_u7528_u6A21_u5757_u5316_uFF1F"><a href="#u4E3A_u4EC0_u4E48_u8981_u7528_u6A21_u5757_u5316_uFF1F" class="headerlink" title="为什么要用模块化？"></a>为什么要用模块化？</h2><ul>
+<li>Q : 模块化写起来那么麻烦，要多写那么多代码，为什么我们还要用呢？</li>
+<li>A : 使用模块化当然不是为了方便，而是为了更好的维护，当一个项目小的时候可能会觉得没必要，但是当一个项目大的时候，模块化可以让我们更好的解决模块问题，模块之间不互相影响，如果需要依赖模块也会比较清晰，后期维护方便。</li>
 </ul>
-<p>那么，我们进行HTTPS请求的时候会发生怎样的一个过程呢？此时发生的是SSL的一个握手过程。</p>
-<h2 id="SSL_u63E1_u624B_u8FC7_u7A0B"><a href="#SSL_u63E1_u624B_u8FC7_u7A0B" class="headerlink" title="SSL握手过程"></a>SSL握手过程</h2><p>假设客户端是A，服务器是B</p>
-<ol>
-<li>A告诉B自己的SSL版本信息，对称加密算法，密钥交换算法，摘要算法有哪些</li>
-<li>B根据A有的算法进行确定利用什么组合来进行通信并且把B的证书（名字和公钥）发送给A</li>
-<li>A根据自己已有的证书对B发来的证书进行真实性验证，有误则发出警告</li>
-<li>如果B需要验证A的真实性，也可以请求认证客户端，如果认证不通过，则结束会话（具体看客户端细节）</li>
-<li>A生成一个秘密消息per-master-secret（对称加密密钥、加密初始化向量、hmac的密钥）,并且用B的公钥加密，封装成ClientKeyExchange消息</li>
-<li>B用自己的私钥解密ClientKeyExchange，然后对秘密消息处理生成对称加密密钥、加密初始化向量、hmac的密钥，这时AB之间已经协商好如何对信息进行加密的方法了</li>
-<li>AB之间利用对称密钥算法进行信息传输</li>
-</ol>
-<p>关于SSL的握手过程，以下几点说明看一下应该会更加理解SSL的握手过程~</p>
-<ul>
-<li>对称加密算法是利用相同的密钥进行加密解密</li>
-<li>非对称密钥算法是是利用公钥和私钥进行加密解密，如果利用公钥进行加密，那么只能利用私钥进行解密，如果利用私钥进行加密，那么只能利用公钥进行加密</li>
-<li>SSL 过程中私钥只有B（服务器）拥有</li>
-<li>SSL的过程其实是非对称加密算法与对称加密算法的结合使用，首先利用非对称加密算法协商对称加密算法的密钥，协商完成后再利用对称加密算法进行信息传输</li>
-<li>对称加密密钥用于信息加密、加密初始化向量用于分组密文算法、hmac的密钥用于信息完整性检查</li>
-</ul>
-<p>理解了HTTPS的SSL握手后，相信对HTTPS的理解更加深刻，以后再也不会一脸懵逼啦~</p>
+<h2 id="seajs_u4E2D_u5B9A_u4E49_u7684_u6A21_u5757_u72B6_u6001"><a href="#seajs_u4E2D_u5B9A_u4E49_u7684_u6A21_u5757_u72B6_u6001" class="headerlink" title="seajs中定义的模块状态"></a>seajs中定义的模块状态</h2><table>
+<thead>
+<tr>
+<th>suatus</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FETCHING: 1</td>
+<td>模块正在请求中</td>
+</tr>
+<tr>
+<td>SAVED: 2</td>
+<td>模块已经下载完毕</td>
+</tr>
+<tr>
+<td>LOADING: 3</td>
+<td>模块依赖准备中</td>
+</tr>
+<tr>
+<td>LOADED: 4</td>
+<td>模块依赖准备完毕</td>
+</tr>
+<tr>
+<td>EXECUTING: 5</td>
+<td>模块正在执行</td>
+</tr>
+<tr>
+<td>EXECUTED: 6</td>
+<td>模块执行完毕</td>
+</tr>
+</tbody>
+</table>
+<h2 id="u51E0_u4E2A_u5168_u5C40_u53D8_u91CF"><a href="#u51E0_u4E2A_u5168_u5C40_u53D8_u91CF" class="headerlink" title="几个全局变量"></a>几个全局变量</h2><table>
+<thead>
+<tr>
+<th>suatus</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cachedMods（uri : mod）</td>
+<td>所有模块信息</td>
+</tr>
+<tr>
+<td>fetchingList（uri : true）</td>
+<td>正在请求的模块队列</td>
+</tr>
+<tr>
+<td>fetchedList（uri : true）</td>
+<td>请求完毕的模块队列</td>
+</tr>
+<tr>
+<td>callbackList（uri : mod）</td>
+<td>需要回调的模块队列</td>
+</tr>
+</tbody>
+</table>
+<h2 id="u4E00_u4E2A_u6A21_u5757_u4FE1_u606F"><a href="#u4E00_u4E2A_u6A21_u5757_u4FE1_u606F" class="headerlink" title="一个模块信息"></a>一个模块信息</h2><table>
+<thead>
+<tr>
+<th>suatus</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uri</td>
+<td>模块的uri</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>模块的依赖模块</td>
+</tr>
+<tr>
+<td>exports</td>
+<td>模块返回值</td>
+</tr>
+<tr>
+<td>status</td>
+<td>模块状态</td>
+</tr>
+<tr>
+<td>_waitings</td>
+<td>依赖该模块的模块数</td>
+</tr>
+<tr>
+<td>_remain</td>
+<td>没有准备完的依赖模块数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="seajs_u6A21_u5757_u5982_u4F55_u52A0_u8F7D_uFF1F"><a href="#seajs_u6A21_u5757_u5982_u4F55_u52A0_u8F7D_uFF1F" class="headerlink" title="seajs模块如何加载？"></a>seajs模块如何加载？</h2><h3 id="1-_u5F15_u5165seajs_u6587_u4EF6"><a href="#1-_u5F15_u5165seajs_u6587_u4EF6" class="headerlink" title="1.引入seajs文件"></a>1.引入seajs文件</h3><h3 id="2-_u4F7F_u7528seajs-config_u5B9A_u4E49base_u3001alias_u3001path"><a href="#2-_u4F7F_u7528seajs-config_u5B9A_u4E49base_u3001alias_u3001path" class="headerlink" title="2.使用seajs.config定义base、alias、path"></a>2.使用seajs.config定义base、alias、path</h3><h3 id="3-_u4F7F_u7528seajs-use_28ids_2Ccallback_29"><a href="#3-_u4F7F_u7528seajs-use_28ids_2Ccallback_29" class="headerlink" title="3.使用seajs.use(ids,callback)"></a>3.使用seajs.use(ids,callback)</h3><p>seajs.use方法调用了Module.preload(callback)这个方法，在这里传入的callback是Module.use(ids, callback, uri)这个方法</p>
+<h3 id="4-_u8C03_u7528Module-preload_28callback_29"><a href="#4-_u8C03_u7528Module-preload_28callback_29" class="headerlink" title="4.调用Module.preload(callback)"></a>4.调用Module.preload(callback)</h3><p>这个函数的作用是用来预加载的，判断config的时候有没有需要预加载的模块，有的话进行预加载操作，没有则直接调用callback</p>
+<h3 id="5-_u8C03_u7528Module-use_28ids_2C_callback_2C_uri_29"><a href="#5-_u8C03_u7528Module-use_28ids_2C_callback_2C_uri_29" class="headerlink" title="5.调用Module.use(ids, callback, uri)"></a>5.调用Module.use(ids, callback, uri)</h3><p>这里调用Module.get来获取模块实例，并且设置了当前模块的callback，然后对该模块调用load方法，如果有传入callback方法，则用apply使该方法在global下调用</p>
+<h3 id="6-_u8C03_u7528Module-prototype-load_28_29"><a href="#6-_u8C03_u7528Module-prototype-load_28_29" class="headerlink" title="6.调用Module.prototype.load()"></a>6.调用Module.prototype.load()</h3><blockquote>
+<p>把当前模块的状态设为LOADING: 3</p>
+</blockquote>
+<p>在这里首先获取该模块的所有依赖，遍历依赖模块，如果依赖模块还没请求，则调用Module.prototype.fetch(requestCache)请求依赖模块，如果依赖模块数为0，则该模块执行onload操作</p>
+<h3 id="7-Module-prototype-fetch_28requestCache_29"><a href="#7-Module-prototype-fetch_28requestCache_29" class="headerlink" title="7.Module.prototype.fetch(requestCache)"></a>7.Module.prototype.fetch(requestCache)</h3><blockquote>
+<p>把当前模块的状态设为FETCHING: 1</p>
+</blockquote>
+<p>这里是请求操作，这里调用了request函数，发起HTTP请求请求当前模块，这里设置了onRequest函数，请求完毕之后调用onRequest函数，这里调用了Module.save(uri, meta)，保存模块信息之后看看callbackList的模块，再调用load方法，回到<strong>步骤6</strong></p>
+<h3 id="8-Module-save_28uri_2C_meta_29"><a href="#8-Module-save_28uri_2C_meta_29" class="headerlink" title="8.Module.save(uri, meta)"></a>8.Module.save(uri, meta)</h3><blockquote>
+<p>把当前模块的状态设为SAVED: 2</p>
+</blockquote>
+<p>这里把当前模块的信息保存到cachedMods对象中</p>
+<h3 id="9-Module-prototype-onload"><a href="#9-Module-prototype-onload" class="headerlink" title="9.Module.prototype.onload"></a>9.Module.prototype.onload</h3><blockquote>
+<p>把当前模块的状态设为LOADED: 4</p>
+</blockquote>
+<p>执行到这里的时候，表示当前模块的依赖全部加载完毕或者该模块没有依赖模块，如果该模块有callback函数（Module.use设置的），则调用callback函数，获取依赖该模块的模块，然后遍历，设当前模块为mod，依赖该模块的模块为m，m的_remain等于m的_remain减去mod的_waitings，如果m的_remain为0，表示m模块的依赖全部加载完毕，执行onload操作，又再一次执行<strong>步骤9</strong></p>
+<h3 id="10-mod-callback"><a href="#10-mod-callback" class="headerlink" title="10.mod.callback"></a>10.mod.callback</h3><p>这里是模块的回调函数，调用Module.use的时候就会给模块设置callback函数，这里遍历当前模块的依赖模块，然后调用Module.prototype.exec执行依赖模块</p>
+<h3 id="11-Module-prototype-exec"><a href="#11-Module-prototype-exec" class="headerlink" title="11.Module.prototype.exec"></a>11.Module.prototype.exec</h3><blockquote>
+<p>把当前模块的状态设为EXECUTING: 5</p>
+</blockquote>
+<p>设置了require方法，判断mod.factory是不是一个函数，如果是则调用该方法，并且传入(require,exports,module),如果factory中需要require其他方法时会调用这里设置的require方法，获取该模块并执行exec方法，又再一次执行<strong>步骤11</strong></p>
+<blockquote>
+<p>把当前模块的状态设为EXECUTED: 6</p>
+</blockquote>
+<p>到这里，所有模块加载并且执行结束</p>
 
       
     </div>
@@ -310,11 +391,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTTPS/" rel="tag">#HTTPS</a>
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
           
-            <a href="/tags/SSL/" rel="tag">#SSL</a>
-          
-            <a href="/tags/计算机网络/" rel="tag">#计算机网络</a>
+            <a href="/tags/seajs/" rel="tag">#seajs</a>
           
         </div>
       
@@ -323,17 +402,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/BFC/" rel="next" title="浅谈BFC">
-                <i class="fa fa-chevron-left"></i> 浅谈BFC
+              <a href="/2016/06/18/prototype/" rel="next" title="原型&继承">
+                <i class="fa fa-chevron-left"></i> 原型&继承
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/06/http1-x-2-0/" rel="prev" title="HTTP1.1 vs HTTP2.0">
-                HTTP1.1 vs HTTP2.0 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -359,8 +434,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/HTTP/"
-           data-title="about HTTPS and SSL" data-url="http://xxxbw.github.io/2016/03/20/HTTP/">
+      <div class="ds-thread" data-thread-key="2016/07/31/seajs-module/"
+           data-title="seajs-module" data-url="http://xxxbw.github.io/2016/07/31/seajs-module/">
       </div>
     
   </div>
@@ -448,7 +523,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">1.</span> <span class="nav-text">HTTP（超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">2.</span> <span class="nav-text">HTTPS（安全超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><span class="nav-number">3.</span> <span class="nav-text">HTTP与HTTPS的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL"><span class="nav-number">4.</span> <span class="nav-text">SSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL_u63E1_u624B_u8FC7_u7A0B"><span class="nav-number">5.</span> <span class="nav-text">SSL握手过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E3A_u4EC0_u4E48_u8981_u7528_u6A21_u5757_u5316_uFF1F"><span class="nav-number">1.</span> <span class="nav-text">为什么要用模块化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seajs_u4E2D_u5B9A_u4E49_u7684_u6A21_u5757_u72B6_u6001"><span class="nav-number">2.</span> <span class="nav-text">seajs中定义的模块状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u51E0_u4E2A_u5168_u5C40_u53D8_u91CF"><span class="nav-number">3.</span> <span class="nav-text">几个全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u4E00_u4E2A_u6A21_u5757_u4FE1_u606F"><span class="nav-number">4.</span> <span class="nav-text">一个模块信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seajs_u6A21_u5757_u5982_u4F55_u52A0_u8F7D_uFF1F"><span class="nav-number">5.</span> <span class="nav-text">seajs模块如何加载？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-_u5F15_u5165seajs_u6587_u4EF6"><span class="nav-number">5.1.</span> <span class="nav-text">1.引入seajs文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-_u4F7F_u7528seajs-config_u5B9A_u4E49base_u3001alias_u3001path"><span class="nav-number">5.2.</span> <span class="nav-text">2.使用seajs.config定义base、alias、path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-_u4F7F_u7528seajs-use_28ids_2Ccallback_29"><span class="nav-number">5.3.</span> <span class="nav-text">3.使用seajs.use(ids,callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-_u8C03_u7528Module-preload_28callback_29"><span class="nav-number">5.4.</span> <span class="nav-text">4.调用Module.preload(callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-_u8C03_u7528Module-use_28ids_2C_callback_2C_uri_29"><span class="nav-number">5.5.</span> <span class="nav-text">5.调用Module.use(ids, callback, uri)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-_u8C03_u7528Module-prototype-load_28_29"><span class="nav-number">5.6.</span> <span class="nav-text">6.调用Module.prototype.load()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Module-prototype-fetch_28requestCache_29"><span class="nav-number">5.7.</span> <span class="nav-text">7.Module.prototype.fetch(requestCache)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Module-save_28uri_2C_meta_29"><span class="nav-number">5.8.</span> <span class="nav-text">8.Module.save(uri, meta)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Module-prototype-onload"><span class="nav-number">5.9.</span> <span class="nav-text">9.Module.prototype.onload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-mod-callback"><span class="nav-number">5.10.</span> <span class="nav-text">10.mod.callback</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Module-prototype-exec"><span class="nav-number">5.11.</span> <span class="nav-text">11.Module.prototype.exec</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
