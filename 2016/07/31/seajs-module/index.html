@@ -59,13 +59,13 @@
 
 <meta name="description" content="摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seajs-module">
+<meta property="og:title" content="seajs源码解析--module">
 <meta property="og:url" content="http://xxxbw.github.io/2016/07/31/seajs-module/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
 <meta property="og:description" content="摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~">
-<meta property="og:updated_time" content="2016-07-31T13:07:28.511Z">
+<meta property="og:updated_time" content="2016-08-01T14:28:04.673Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seajs-module">
+<meta name="twitter:title" content="seajs源码解析--module">
 <meta name="twitter:description" content="摘要：平常工作的项目是用的是seajs来做的模块化，于是我就看了一下seajs的源码，看看seajs到底是怎么实现模块化的~">
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> seajs-module | xxxBW's blog </title>
+  <title> seajs源码解析--module | xxxBW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -202,7 +202,7 @@
             
             
               
-                seajs-module
+                seajs源码解析--module
               
             
           </h1>
@@ -234,11 +234,13 @@
 
           
 
-           |  
-         <span id="/2016/07/31/seajs-module/"class="leancloud_visitors"  data-flag-title="seajs-module">
-               阅读次数
+          &nbsp; | &nbsp;  
+          阅读次数
+          
+          <span id="/2016/07/31/seajs-module/"class="leancloud_visitors"  data-flag-title="seajs源码解析--module">
+               
             </span>
-      
+          
         </div>
       </header>
     
@@ -433,7 +435,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/07/31/seajs-module/"
-           data-title="seajs-module" data-url="http://xxxbw.github.io/2016/07/31/seajs-module/">
+           data-title="seajs源码解析--module" data-url="http://xxxbw.github.io/2016/07/31/seajs-module/">
       </div>
     
   </div>
@@ -917,86 +919,85 @@
 
 
   
-  <!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
 <script>AV.initialize("wF44kOFCMqBlcA6IuBHMSg1L-gzGzoHsz", "hr1nAAmvOFXHPzQ0sApECf72");</script>
 <script>
 function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
+  var query = new AV.Query(Counter);
+  $(".leancloud_visitors").each(function() {
+    var url = $(this).attr("id").trim();
+    query.equalTo("url", url);
+    query.find({
+      success: function(results) {
+        if (results.length == 0) {
+          var content = $(document.getElementById(url)).text() + ': 0';
+          $(document.getElementById(url)).text(content);
+          return;
+        }
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+          $(document.getElementById(url)).text(content);
+        }
+      },
+      error: function(object, error) {
+        console.log("Error: " + error.code + " " + error.message);
+      }
+    });
 
-	});
+  });
 }
 
 function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
+  var Counter = AV.Object.extend("Counter");
+  url = $(".leancloud_visitors").attr('id').trim();
+  title = $(".leancloud_visitors").attr('data-flag-title').trim();
+  var query = new AV.Query(Counter);
+  query.equalTo("url", url);
+  query.find({
+    success: function(results) {
+      if (results.length > 0) {
+        var counter = results[0];
+        counter.fetchWhenSave(true);
+        counter.increment("time");
+        counter.save(null, {
+          success: function(counter) {
+            var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+            $(document.getElementById(url)).text(content);
+          },
+          error: function(counter, error) {
+            console.log('Failed to save Visitor num, with error message: ' + error.message);
+          }
+        });
+      } else {
+        var newcounter = new Counter();
+        newcounter.set("title", title);
+        newcounter.set("url", url);
+        newcounter.set("time", 1);
+        newcounter.save(null, {
+          success: function(newcounter) {
+              console.log("newcounter.get('time')="+newcounter.get('time'));
+            var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+            $(document.getElementById(url)).text(content);
+          },
+          error: function(newcounter, error) {
+            console.log('Failed to create');
+          }
+        });
+      }
+    },
+    error: function(error) {
+      console.log('Error:' + error.code + " " + error.message);
+    }
+  });
 }
 $(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
+  var Counter = AV.Object.extend("Counter");
+  if ($('.leancloud_visitors').length == 1) {
+    addCount(Counter);
+  } else if ($('.post-title-link').length > 1) {
+    showTime(Counter);
+  }
 }); 
 </script>
   
