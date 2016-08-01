@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTPS,SSL,计算机网络," />
+  <meta name="keywords" content="HTTP,计算机网络," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta name="description" content="摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="about HTTPS and SSL">
-<meta property="og:url" content="http://xxxbw.github.io/2016/03/20/HTTP/index.html">
+<meta property="og:title" content="get和post的区别">
+<meta property="og:url" content="http://xxxbw.github.io/2016/08/01/get-post/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
-<meta property="og:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
-<meta property="og:updated_time" content="2016-04-06T12:11:22.042Z">
+<meta property="og:description" content="摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~">
+<meta property="og:updated_time" content="2016-08-01T14:24:02.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about HTTPS and SSL">
-<meta name="twitter:description" content="摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？">
+<meta name="twitter:title" content="get和post的区别">
+<meta name="twitter:description" content="摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> about HTTPS and SSL | xxxBW's blog </title>
+  <title> get和post的区别 | xxxBW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -202,7 +202,7 @@
             
             
               
-                about HTTPS and SSL
+                get和post的区别
               
             
           </h1>
@@ -214,8 +214,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T16:58:09+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-08-01T22:12:04+08:00" content="2016-08-01">
+              2016-08-01
             </time>
           </span>
 
@@ -225,8 +225,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/20/HTTP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/HTTP/" itemprop="commentsCount"></span>
+                <a href="/2016/08/01/get-post/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/get-post/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -235,7 +235,7 @@
           
 
            |  
-         <span id="/2016/03/20/HTTP/"class="leancloud_visitors"  data-flag-title="about HTTPS and SSL">
+         <span id="/2016/08/01/get-post/"class="leancloud_visitors"  data-flag-title="get和post的区别">
                阅读次数
             </span>
       
@@ -250,52 +250,39 @@
       
 
       
-        <p>摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？<br><a id="more"></a><br>首先我们来看下HTTP的解释</p>
-<h2 id="HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTP（超文本传输协议）"></a>HTTP（超文本传输协议）</h2><blockquote>
-<p>超文本传输协议，是客户端和服务器请求和应答的标准，用于服务器传输超文本到本地浏览器。</p>
-</blockquote>
-<p>那么HTTPS又是什么呢？</p>
-<h2 id="HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><a href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09" class="headerlink" title="HTTPS（安全超文本传输协议）"></a>HTTPS（安全超文本传输协议）</h2><blockquote>
-<p>HTTPS是HTTP的安全版，在HTTP下加入了SSL层，SSL是安全的基础，用于加密详细内容，HTTPS存在一个与HTTP不同的默认端口和一个加密/身份验证层（介于TCP个HTTP之间）。</p>
-</blockquote>
-<p>很多情况下，我们会被问到HTTP与HTTPS的不同，到底有什么不同呢？我们一个一个来看。</p>
-<h2 id="HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><a href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C" class="headerlink" title="HTTP与HTTPS的不同"></a>HTTP与HTTPS的不同</h2><ol>
-<li>HTTPS需要到CA机构申请证书，一般证书很少免费，需要交费，用于证明服务器用途类型，客户端通过信任证书，从而信任主机</li>
-<li>HTTP的端口是80，HTTPS的端口是443</li>
-<li>HTTP是超文本传输协议，信息是明文传输，HTTPS 则是具有安全性的SSL加密传输协议</li>
-<li>HTTP的链接简单，是无状态的，HTTPS是由SSL+HTTP协议构建的可进行加密传输，身份认证的网络协议，比HTTP安全</li>
-<li>HTTP速度比较快，HTTPS速度比较慢</li>
-</ol>
-<p>说完这些不同之后，这时，面试官可能会问，你说HTTPS比较慢，为什么它会比较慢呢？如果没有研究，那就真的一脸懵逼了。不怕，我们来看看HTTPS下的SSL。</p>
-<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><blockquote>
-<p>SSL是web浏览器和web服务器进行信息安全交换的协议</p>
-</blockquote>
-<p>提供的服务</p>
+        <p>摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~<br><a id="more"></a></p>
+<p>以前我师兄问过我这么一个问题</p>
 <ul>
-<li>认证用户和服务器</li>
-<li>加密数据防止被窃取</li>
-<li>确保信息完整性（完整性检查）</li>
+<li>Q : get和post有什么区别？</li>
+<li>A ：一个是用于取数据，一个是用于修改数据</li>
+<li>Q : 还有吗？</li>
+<li>A : 好像就这么多。。</li>
 </ul>
-<p>那么，我们进行HTTPS请求的时候会发生怎样的一个过程呢？此时发生的是SSL的一个握手过程。</p>
-<h2 id="SSL_u63E1_u624B_u8FC7_u7A0B"><a href="#SSL_u63E1_u624B_u8FC7_u7A0B" class="headerlink" title="SSL握手过程"></a>SSL握手过程</h2><p>假设客户端是A，服务器是B</p>
-<ol>
-<li>A告诉B自己的SSL版本信息，对称加密算法，密钥交换算法，摘要算法有哪些</li>
-<li>B根据A有的算法进行确定利用什么组合来进行通信并且把B的证书（名字和公钥）发送给A</li>
-<li>A根据自己已有的证书对B发来的证书进行真实性验证，有误则发出警告</li>
-<li>如果B需要验证A的真实性，也可以请求认证客户端，如果认证不通过，则结束会话（具体看客户端细节）</li>
-<li>A生成一个秘密消息per-master-secret（对称加密密钥、加密初始化向量、hmac的密钥）,并且用B的公钥加密，封装成ClientKeyExchange消息</li>
-<li>B用自己的私钥解密ClientKeyExchange，然后对秘密消息处理生成对称加密密钥、加密初始化向量、hmac的密钥，这时AB之间已经协商好如何对信息进行加密的方法了</li>
-<li>AB之间利用对称密钥算法进行信息传输</li>
-</ol>
-<p>关于SSL的握手过程，以下几点说明看一下应该会更加理解SSL的握手过程~</p>
-<ul>
-<li>对称加密算法是利用相同的密钥进行加密解密</li>
-<li>非对称密钥算法是是利用公钥和私钥进行加密解密，如果利用公钥进行加密，那么只能利用私钥进行解密，如果利用私钥进行加密，那么只能利用公钥进行加密</li>
-<li>SSL 过程中私钥只有B（服务器）拥有</li>
-<li>SSL的过程其实是非对称加密算法与对称加密算法的结合使用，首先利用非对称加密算法协商对称加密算法的密钥，协商完成后再利用对称加密算法进行信息传输</li>
-<li>对称加密密钥用于信息加密、加密初始化向量用于分组密文算法、hmac的密钥用于信息完整性检查</li>
+<p>然而我的回答他好像不是很满意，那时候确实是我对get和post的理解还不够，之后做了整理，才发现原来这才是答案~</p>
+<p>HTTP与服务器交互的方法有4种：get、post、put、delete，这4种方法其实就对应了对资源的查、改、增、删这4个操作。不过平时我们用的话都是用get和post方法，用这两个方法就能完成所有的操作啦。</p>
+<p>那get和post到底有什么区别呢？这个问题很多同学在面试的时候都会被问到，也是一个十分经典的问题，这里我来说说我自己对get和post的区别的看法~</p>
+<h2 id="1-_u539F_u7406_u533A_u522B"><a href="#1-_u539F_u7406_u533A_u522B" class="headerlink" title="1.原理区别"></a>1.原理区别</h2><p>get是用于获取数据<br>这里的获取数据对应我们前面说到的对资源的查找操作，这个操作是安全而且幂等的，这里的安全是指这里是用于获取信息而不是修改信息，不会产生其他影响，而幂等则表现为对同个URL的多个请求都返回同样的结果。</p>
+<p>post表示可能修改服务器资源</p>
+<h2 id="HTTP_u5305_u7ED3_u6784"><a href="#HTTP_u5305_u7ED3_u6784" class="headerlink" title="HTTP包结构"></a>HTTP包结构</h2><p>这里我们先来看一下HTTP包结构</p>
+<h3 id="HTTP_u8BF7_u6C42_uFF1A"><a href="#HTTP_u8BF7_u6C42_uFF1A" class="headerlink" title="HTTP请求："></a>HTTP请求：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;request line&#62;    // &#35831;&#27714;&#34892;&#65306;&#35831;&#27714;&#31867;&#22411;&#12289;&#35201;&#35775;&#38382;&#30340;&#36164;&#28304;&#20197;&#21450;HTTP&#29256;&#26412;&#10;&#60;headers&#62;    // &#35831;&#27714;&#22836;&#65306;&#35828;&#26126;&#26381;&#21153;&#22120;&#35201;&#20351;&#29992;&#30340;&#38468;&#21152;&#20449;&#24687;&#10;&#60;blank line&#62;    // &#31354;&#34892;&#10;&#60;request-body&#62;    //&#35831;&#27714;&#20307;&#65306;&#20219;&#24847;&#20854;&#20182;&#25968;&#25454;</span><br></pre></td></tr></table></figure>
+<h3 id="HTTP_u54CD_u5E94_uFF1A"><a href="#HTTP_u54CD_u5E94_uFF1A" class="headerlink" title="HTTP响应："></a>HTTP响应：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;status line&#62;    //&#29366;&#24577;&#34892;&#65306;&#29366;&#24577;&#30721;&#34920;&#31034;&#21709;&#24212;&#29366;&#24577;&#10;&#60;headers&#62;    // &#21709;&#24212;&#22836;&#65306;&#26381;&#21153;&#22120;&#36820;&#22238;&#35831;&#27714;&#22836;&#20013;&#38656;&#35201;&#30340;&#20449;&#24687;&#10;&#60;blank line&#62;    // &#31354;&#34892;&#10;&#60;response-body&#62;    // &#21709;&#24212;&#20307;&#65306;&#35831;&#27714;&#36820;&#22238;&#30340;&#25968;&#25454;</span><br></pre></td></tr></table></figure>
+<h2 id="u5E38_u89C1_u7684_u72B6_u6001_u7801_uFF1A"><a href="#u5E38_u89C1_u7684_u72B6_u6001_u7801_uFF1A" class="headerlink" title="常见的状态码："></a>常见的状态码：</h2><ul>
+<li>200（OK）：找到资源，正常返回</li>
+<li>301（Move Permanently）：该资源被永久的改变了位置，通常会发送header来重定向到新的位置</li>
+<li>302（Found）：该资源被临时改变了位置，通常会发送header来临时重定向到新的位置</li>
+<li>304（Not Modified）：该资源上次请求之后没有任何修改，使用上次缓存的资源，用于浏览器缓存机制</li>
+<li>404（NOT FOUND）：在指定位置没找到该资源</li>
+<li>500（Internal Server Error）：服务器程序码出错</li>
 </ul>
-<p>理解了HTTPS的SSL握手后，相信对HTTPS的理解更加深刻，以后再也不会一脸懵逼啦~</p>
+<p>看完了HTTP包结构之后，我们再来看看get和post的其他区别</p>
+<h2 id="2-_u53C2_u6570_u4F4D_u7F6E"><a href="#2-_u53C2_u6570_u4F4D_u7F6E" class="headerlink" title="2.参数位置"></a>2.参数位置</h2><p>get请求的数据附在URL之后，即HTTP协议头，以？分割url和传送数据，用&amp;连接多个参数，数据如果是英文或者数字，则原样发送，空格转换为+，其他则转换为base64编码</p>
+<p>post请求把数据则在HTTP请求包体中，以键值对的形式传送</p>
+<h2 id="3-_u7F13_u5B58_u673A_u5236"><a href="#3-_u7F13_u5B58_u673A_u5236" class="headerlink" title="3.缓存机制"></a>3.缓存机制</h2><p>get请求能够被缓存，请求会保存到浏览器的浏览记录中</p>
+<p>post并不能被缓存</p>
+<h2 id="4-_u4F20_u8F93_u6570_u636E_u957F_u5EA6"><a href="#4-_u4F20_u8F93_u6570_u636E_u957F_u5EA6" class="headerlink" title="4.传输数据长度"></a>4.传输数据长度</h2><p>get没有长度限制，因为HTTP请求没有限制URL长度，但是浏览器有限制URL长度，例如IE限制的长度为2k(2048字节)</p>
+<p>post请求数据长度浏览器这边没有限制，但是服务器那边会对提交数据大小进行限制</p>
+<h2 id="5-_u5B89_u5168_u6027"><a href="#5-_u5B89_u5168_u6027" class="headerlink" title="5.安全性"></a>5.安全性</h2><p>get请求数据使用base64编码，显示在URL中可能造成CSRF攻击</p>
+<p>post数据存放在request-body中，相对来说比较安全</p>
 
       
     </div>
@@ -304,9 +291,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTTPS/" rel="tag">#HTTPS</a>
-          
-            <a href="/tags/SSL/" rel="tag">#SSL</a>
+            <a href="/tags/HTTP/" rel="tag">#HTTP</a>
           
             <a href="/tags/计算机网络/" rel="tag">#计算机网络</a>
           
@@ -317,17 +302,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/BFC/" rel="next" title="浅谈BFC">
-                <i class="fa fa-chevron-left"></i> 浅谈BFC
+              <a href="/2016/07/31/seajs-module/" rel="next" title="seajs-module">
+                <i class="fa fa-chevron-left"></i> seajs-module
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/06/http1-x-2-0/" rel="prev" title="HTTP1.1 vs HTTP2.0">
-                HTTP1.1 vs HTTP2.0 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -353,8 +334,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/20/HTTP/"
-           data-title="about HTTPS and SSL" data-url="http://xxxbw.github.io/2016/03/20/HTTP/">
+      <div class="ds-thread" data-thread-key="2016/08/01/get-post/"
+           data-title="get和post的区别" data-url="http://xxxbw.github.io/2016/08/01/get-post/">
       </div>
     
   </div>
@@ -442,7 +423,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_uFF08_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">1.</span> <span class="nav-text">HTTP（超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS_uFF08_u5B89_u5168_u8D85_u6587_u672C_u4F20_u8F93_u534F_u8BAE_uFF09"><span class="nav-number">2.</span> <span class="nav-text">HTTPS（安全超文本传输协议）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u4E0EHTTPS_u7684_u4E0D_u540C"><span class="nav-number">3.</span> <span class="nav-text">HTTP与HTTPS的不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL"><span class="nav-number">4.</span> <span class="nav-text">SSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL_u63E1_u624B_u8FC7_u7A0B"><span class="nav-number">5.</span> <span class="nav-text">SSL握手过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_u539F_u7406_u533A_u522B"><span class="nav-number">1.</span> <span class="nav-text">1.原理区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u5305_u7ED3_u6784"><span class="nav-number">2.</span> <span class="nav-text">HTTP包结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP_u8BF7_u6C42_uFF1A"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP请求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP_u54CD_u5E94_uFF1A"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP响应：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E38_u89C1_u7684_u72B6_u6001_u7801_uFF1A"><span class="nav-number">3.</span> <span class="nav-text">常见的状态码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-_u53C2_u6570_u4F4D_u7F6E"><span class="nav-number">4.</span> <span class="nav-text">2.参数位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-_u7F13_u5B58_u673A_u5236"><span class="nav-number">5.</span> <span class="nav-text">3.缓存机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-_u4F20_u8F93_u6570_u636E_u957F_u5EA6"><span class="nav-number">6.</span> <span class="nav-text">4.传输数据长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-_u5B89_u5168_u6027"><span class="nav-number">7.</span> <span class="nav-text">5.安全性</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
