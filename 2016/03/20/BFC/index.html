@@ -912,7 +912,7 @@ function addCount(Counter) {
         counter.increment("time");
         counter.save(null, {
           success: function(counter) {
-            var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+            var content = $(document.getElementById(url)).text();
             $(document.getElementById(url)).text(content);
           },
           error: function(counter, error) {
