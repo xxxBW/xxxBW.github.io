@@ -189,7 +189,7 @@
       
         
       
-      嗯..! 目前共计 8 篇日志。 继续努力。
+      嗯..! 目前共计 9 篇日志。 继续努力。
     </span>
 
     
@@ -278,7 +278,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -288,7 +288,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -556,7 +556,7 @@ function showTime(Counter) {
     query.find({
       success: function(results) {
         if (results.length == 0) {
-          var content = 0;
+          var content = '0';
           $(document.getElementById(url)).text(content);
           return;
         }
@@ -602,7 +602,6 @@ function addCount(Counter) {
         newcounter.set("time", 1);
         newcounter.save(null, {
           success: function(newcounter) {
-              console.log("newcounter.get('time')="+newcounter.get('time'));
             var content = newcounter.get('time');
             $(document.getElementById(url)).text(content);
           },

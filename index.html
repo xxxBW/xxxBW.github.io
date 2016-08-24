@@ -187,6 +187,113 @@
 
     
     
+      
+      
+        
+        
+        
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/25/strict/" itemprop="url">
+                  严格模式 vs 混杂模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-25T00:13:37+08:00" content="2016-08-25">
+              2016-08-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/25/strict/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/25/strict/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          &nbsp; | &nbsp;  
+          阅读次数
+          
+          <span id="/2016/08/25/strict/"class="leancloud_visitors"  data-flag-title="严格模式 vs 混杂模式">
+               
+            </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>摘要：正常情况下我们写js都是在混杂模式下的，ES5定义了另外一种模式-&gt;严格模式<br>为什么叫严格模式？<br>严格模式就是让js语法更加合理，更加严谨，现在包括IE10在内的浏览器都支持严格模式。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/25/strict/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -581,104 +688,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/20/HTTP/" itemprop="url">
-                  about HTTPS and SSL
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T16:58:09+08:00" content="2016-03-20">
-              2016-03-20
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/03/20/HTTP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/20/HTTP/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          &nbsp; | &nbsp;  
-          阅读次数
-          
-          <span id="/2016/03/20/HTTP/"class="leancloud_visitors"  data-flag-title="about HTTPS and SSL">
-               
-            </span>
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>摘要：在面试中经常会被问到HTTP和HTTPS有什么区别，那时的我在粗略知道HTTPS是比HTTP安全的，然后其他的我就一脸懵逼了。面试完赶紧来探索HTTPS到底是一个什么样的协议，跟HTTP到底有什么区别呢？<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/20/HTTP/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -725,7 +734,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -735,7 +744,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -997,7 +1006,7 @@ function showTime(Counter) {
     query.find({
       success: function(results) {
         if (results.length == 0) {
-          var content = 0;
+          var content = '0';
           $(document.getElementById(url)).text(content);
           return;
         }
@@ -1043,7 +1052,6 @@ function addCount(Counter) {
         newcounter.set("time", 1);
         newcounter.save(null, {
           success: function(newcounter) {
-              console.log("newcounter.get('time')="+newcounter.get('time'));
             var content = newcounter.get('time');
             $(document.getElementById(url)).text(content);
           },
