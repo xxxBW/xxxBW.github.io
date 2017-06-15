@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。">
+<meta name="description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。在这里介绍一下前端转义有哪些~">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端转义">
 <meta property="og:url" content="http://xxxbw.github.io/2017/06/15/transcode/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
-<meta property="og:description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。">
-<meta property="og:updated_time" content="2017-06-15T16:42:22.209Z">
+<meta property="og:description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。在这里介绍一下前端转义有哪些~">
+<meta property="og:updated_time" content="2017-06-15T17:05:57.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端转义">
-<meta name="twitter:description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。">
+<meta name="twitter:description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。在这里介绍一下前端转义有哪些~">
 
 
 
@@ -252,24 +252,113 @@
       
 
       
-        <p>摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。<br><a id="more"></a></p>
-<h2 id="u8F6C_u4E49_u7C7B_u578B"><a href="#u8F6C_u4E49_u7C7B_u578B" class="headerlink" title="转义类型"></a>转义类型</h2><p>前端的转义有三种：<br>1.HTML转义<br>2.javascript转义（json转义）<br>3.url转义</p>
-<h2 id="HTML_u8F6C_u4E49"><a href="#HTML_u8F6C_u4E49" class="headerlink" title="HTML转义"></a>HTML转义</h2><p>HTML转义就是把HTML中的特殊字符利用转义字符进行表示。常用的转义字符如下表，”和’用于给变量赋值，&amp;用于转义，&lt;和&gt;用于HTM标签。<br>|字符|十进制|转义字符|<br>|”|&amp;#34|&quot;|<br>|’|&amp;#39|&apos;|<br>|&amp;|&amp;#38|&amp;|<br>|&lt;|&amp;#60|&lt;|<br>|&gt;|&amp;#62|&gt;|<br>|不断开空格|&amp;#160|&nbsp;|</p>
-<p>举个例子，当输出到页面的字符串中带有</p><h1>标签的时候，会发生什么情况？<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"xx"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">var content = '<span class="tag">&lt;<span class="title">h1</span>&gt;</span>这里是h1<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>';</span><br><span class="line">$('#xx').text(content); // 正确</span><br><span class="line">$('#xx').html(content); // 错误</span><br><span class="line">document.getElementById('xx').innerHTML = content; // 错误</span><br></pre></td></tr></table></figure><p></p>
-<p>上面的写法没有对&lt;&gt;进行转义，导致将content设置为html的时候会出现</p><h1>标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。<p></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对str字符串进行html转义</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">html_encode</span>(<span class="params">str</span>) </span>&#123;   </span><br><span class="line">	<span class="keyword">var</span> s = <span class="string">""</span>;   </span><br><span class="line">	<span class="keyword">if</span> (str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;   </span><br><span class="line">	s = str.replace(<span class="regexp">/&amp;/g</span>, <span class="string">"&amp;gt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&amp;lt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/&gt;/g</span>, <span class="string">"&amp;gt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/ /g</span>, <span class="string">"&amp;nbsp;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\'/g</span>, <span class="string">"&amp;#39;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\"/g</span>, <span class="string">"&amp;quot;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\n/g</span>, <span class="string">"&lt;br&gt;"</span>);   </span><br><span class="line">	<span class="keyword">return</span> s;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">var</span> encodeContent = html_encode(content);</span><br><span class="line">$(<span class="string">'#xx'</span>).html(encodeContent); <span class="comment">// 正确</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xx'</span>).innerHTML = encodeContent; <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
-<h2 id="javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09"><a href="#javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09" class="headerlink" title="javascript转义（json转义）"></a>javascript转义（json转义）</h2><p>javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。<br>|转义字符|代码|<br>|–|–|<br>|’|\’|<br>|”|\”|<br>|&amp;|\&amp;|<br>||\|<br>|换行符|\n|<br>|回车符|\r|<br>|制表符|\t|<br>|退格符|\b|<br>|换页符|\f|</p>
+        <p>摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。在这里介绍一下前端转义有哪些~<br><a id="more"></a></p>
+<h2 id="u8F6C_u4E49_u7C7B_u578B"><a href="#u8F6C_u4E49_u7C7B_u578B" class="headerlink" title="转义类型"></a>转义类型</h2><p>前端的转义的类型有三种：<br>1.HTML转义<br>2.javascript转义（json转义）<br>3.url转义</p>
+<h2 id="HTML_u8F6C_u4E49"><a href="#HTML_u8F6C_u4E49" class="headerlink" title="HTML转义"></a>HTML转义</h2><p>HTML转义就是把HTML中的特殊字符利用转义字符进行表示。常用的转义字符如下表，”和’用于给变量赋值，&amp;用于转义，&lt;和&gt;用于HTM标签。</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>十进制</th>
+<th>转义字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“</td>
+<td>&amp;#34</td>
+<td>&amp;quot&nbsp;;</td>
+</tr>
+<tr>
+<td>‘</td>
+<td>&amp;#39</td>
+<td>&amp;apos&nbsp;;</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>&amp;#38</td>
+<td>&amp;amp&nbsp;;</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>&amp;#60</td>
+<td>&amp;lt&nbsp;;</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>&amp;#62</td>
+<td>&amp;gt&nbsp;;</td>
+</tr>
+<tr>
+<td>不断开空格</td>
+<td>&amp;#160</td>
+<td>&amp;nbsp&nbsp;;</td>
+</tr>
+</tbody>
+</table>
+<p>举个例子，当输出到页面的字符串中带有&lt;h1&gt;标签的时候，会发生什么情况？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将content输出到div中</span></span><br><span class="line">&lt;div id=<span class="string">"xx"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">var content = '<span class="tag">&lt;<span class="title">h1</span>&gt;</span>这里是h1<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>';</span><br><span class="line">$('#xx').text(content); // 正确</span><br><span class="line">$('#xx').html(content); // 错误</span><br><span class="line">document.getElementById('xx').innerHTML = content; // 错误</span></span><br></pre></td></tr></table></figure>
+<p>上面的写法没有对&lt;&gt;进行转义，导致将content设置为html的时候会出现&lt;h1&gt;标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对str字符串进行html转义</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">html_encode</span>(<span class="params">str</span>) </span>&#123;   </span><br><span class="line">	<span class="keyword">var</span> s = <span class="string">""</span>;   </span><br><span class="line">	<span class="keyword">if</span> (str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;   </span><br><span class="line">	s = str.replace(<span class="regexp">/&amp;/g</span>, <span class="string">"&amp;gt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&amp;lt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/&gt;/g</span>, <span class="string">"&amp;gt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/ /g</span>, <span class="string">"&amp;nbsp;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\'/g</span>, <span class="string">"&amp;#39;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\"/g</span>, <span class="string">"&amp;quot;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\n/g</span>, <span class="string">"&lt;br&gt;"</span>);   </span><br><span class="line">	<span class="keyword">return</span> s;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">// 转义后的encodeContent再输出到div中</span></span><br><span class="line"><span class="keyword">var</span> encodeContent = html_encode(content);</span><br><span class="line">$(<span class="string">'#xx'</span>).html(encodeContent); <span class="comment">// 正确</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xx'</span>).innerHTML = encodeContent; <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
+<h2 id="javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09"><a href="#javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09" class="headerlink" title="javascript转义（json转义）"></a>javascript转义（json转义）</h2><p>javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。</p>
+<table>
+<thead>
+<tr>
+<th>转义字符</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>‘</td>
+<td>\’</td>
+</tr>
+<tr>
+<td>“</td>
+<td>\”</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>\&amp;</td>
+</tr>
+<tr>
+<td>\</td>
+<td>\</td>
+</tr>
+<tr>
+<td>换行符</td>
+<td>\n</td>
+</tr>
+<tr>
+<td>回车符</td>
+<td>\r</td>
+</tr>
+<tr>
+<td>制表符</td>
+<td>\t</td>
+</tr>
+<tr>
+<td>退格符</td>
+<td>\b</td>
+</tr>
+<tr>
+<td>换页符</td>
+<td>\f</td>
+</tr>
+</tbody>
+</table>
 <p>javascript转义经常会在定义字符串的时候遇到。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ret = 'dont't click me'; // 报错</span><br><span class="line">var ret = 'dont\'t click me'; // 正确</span><br></pre></td></tr></table></figure></p>
 <h2 id="url_u8F6C_u4E49"><a href="#url_u8F6C_u4E49" class="headerlink" title="url转义"></a>url转义</h2><blockquote>
 <p>url只能使用英文字母，阿拉伯数字和某些标点符号，其他符号需要编码后才能使用。</p>
 </blockquote>
-<p>浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而<br>ie8以下是使用GB 2312编码。<br>另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。</p>
+<p>浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而ie8以下是使用GB 2312编码。<br>另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。</p>
 <p>为了编码一致，我们可以在请求之前对url进行编码，实现编码统一。</p>
 <h3 id="url_u7F16_u7801_u65B9_u6CD5"><a href="#url_u7F16_u7801_u65B9_u6CD5" class="headerlink" title="url编码方法"></a>url编码方法</h3><p>目前，javascript提供的url编码方法有一下三种<br>1.escape()<br>2.encodeURI()<br>3.encodeURIComponent()</p>
-<h4 id="escape_28_29"><a href="#escape_28_29" class="headerlink" title="escape()"></a>escape()</h4><p>将url转化为Unicode的形式</p>
+<h4 id="escape_28_29"><a href="#escape_28_29" class="headerlink" title="escape()"></a>escape()</h4><p>将url转化为Unicode的形式，这个方法目前在url编码上基本是废弃的，不过当你需要Unicode编码的url的时候还是需要用到它。</p>
 <h4 id="encodeURI_28_29"><a href="#encodeURI_28_29" class="headerlink" title="encodeURI()"></a>encodeURI()</h4><p>除了常见的符号以外，对其他一些在网址中有特殊含义的符号”; / ? : @ &amp; = + $ , #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。</p>
 <h4 id="encodeURIComponent_28_29"><a href="#encodeURIComponent_28_29" class="headerlink" title="encodeURIComponent()"></a>encodeURIComponent()</h4><p>在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码</p>
-</h1></h1>
+<h2 id="u5199_u5728_u6700_u540E"><a href="#u5199_u5728_u6700_u540E" class="headerlink" title="写在最后"></a>写在最后</h2><p>其实，转义说起来也就那么回事，但是真正遇到需要转义的场景有时会比较复杂，可能要进行多种转义才能得出结果，所以，遇到转义的时候要确定涉及多少种转义~</p>
+
       
     </div>
 
@@ -409,34 +498,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u8F6C_u4E49_u7C7B_u578B"><span class="nav-number">1.</span> <span class="nav-text">转义类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML_u8F6C_u4E49"><span class="nav-number">2.</span> <span class="nav-text">HTML转义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">标签的时候，会发生什么情况？12345<div id="xx"></div>var content = '<h1>这里是h1</h1>';$('#xx').text(content); // 正确$('#xx').html(content); // 错误document.getElementById('xx').innerHTML = content; // 错误
-上面的写法没有对<>进行转义，导致将content设置为html的时候会出现标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。
-12345678910111213141516// 对str字符串进行html转义function html_encode(str) {   	var s = "";   	if (str.length == 0) return "";   	s = str.replace(/&/g, "&gt;");   	s = s.replace(/</g, "&lt;");   	s = s.replace(/>/g, "&gt;");   	s = s.replace(/ /g, "&nbsp;");   	s = s.replace(/\'/g, "&#39;");   	s = s.replace(/\"/g, "&quot;");   	s = s.replace(/\n/g, "<br>");   	return s;   }   var encodeContent = html_encode(content);$('#xx').html(encodeContent); // 正确document.getElementById('xx').innerHTML = encodeContent; // 正确
-javascript转义（json转义）javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。|转义字符|代码||–|–||’|\’||”|\”||&|\&|||\||换行符|\n||回车符|\r||制表符|\t||退格符|\b||换页符|\f|
-javascript转义经常会在定义字符串的时候遇到。12var ret = 'dont't click me'; // 报错var ret = 'dont\'t click me'; // 正确
-url转义
-url只能使用英文字母，阿拉伯数字和某些标点符号，其他符号需要编码后才能使用。
-
-浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而ie8以下是使用GB 2312编码。另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。
-为了编码一致，我们可以在请求之前对url进行编码，实现编码统一。
-url编码方法目前，javascript提供的url编码方法有一下三种1.escape()2.encodeURI()3.encodeURIComponent()
-escape()将url转化为Unicode的形式
-encodeURI()除了常见的符号以外，对其他一些在网址中有特殊含义的符号”; / ? : @ & = + $ , #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
-encodeURIComponent()在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码
-</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。
-12345678910111213141516// 对str字符串进行html转义function html_encode(str) {   	var s = "";   	if (str.length == 0) return "";   	s = str.replace(/&/g, "&gt;");   	s = s.replace(/</g, "&lt;");   	s = s.replace(/>/g, "&gt;");   	s = s.replace(/ /g, "&nbsp;");   	s = s.replace(/\'/g, "&#39;");   	s = s.replace(/\"/g, "&quot;");   	s = s.replace(/\n/g, "<br>");   	return s;   }   var encodeContent = html_encode(content);$('#xx').html(encodeContent); // 正确document.getElementById('xx').innerHTML = encodeContent; // 正确
-javascript转义（json转义）javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。|转义字符|代码||–|–||’|\’||”|\”||&|\&|||\||换行符|\n||回车符|\r||制表符|\t||退格符|\b||换页符|\f|
-javascript转义经常会在定义字符串的时候遇到。12var ret = 'dont't click me'; // 报错var ret = 'dont\'t click me'; // 正确
-url转义
-url只能使用英文字母，阿拉伯数字和某些标点符号，其他符号需要编码后才能使用。
-
-浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而ie8以下是使用GB 2312编码。另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。
-为了编码一致，我们可以在请求之前对url进行编码，实现编码统一。
-url编码方法目前，javascript提供的url编码方法有一下三种1.escape()2.encodeURI()3.encodeURIComponent()
-escape()将url转化为Unicode的形式
-encodeURI()除了常见的符号以外，对其他一些在网址中有特殊含义的符号”; / ? : @ & = + $ , #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
-encodeURIComponent()在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码
-</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09"><span class="nav-number">1.</span> <span class="nav-text">javascript转义（json转义）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url_u8F6C_u4E49"><span class="nav-number">2.</span> <span class="nav-text">url转义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url_u7F16_u7801_u65B9_u6CD5"><span class="nav-number">2.1.</span> <span class="nav-text">url编码方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#escape_28_29"><span class="nav-number">2.1.1.</span> <span class="nav-text">escape()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encodeURI_28_29"><span class="nav-number">2.1.2.</span> <span class="nav-text">encodeURI()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encodeURIComponent_28_29"><span class="nav-number">2.1.3.</span> <span class="nav-text">encodeURIComponent()</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u8F6C_u4E49_u7C7B_u578B"><span class="nav-number">1.</span> <span class="nav-text">转义类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML_u8F6C_u4E49"><span class="nav-number">2.</span> <span class="nav-text">HTML转义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09"><span class="nav-number">3.</span> <span class="nav-text">javascript转义（json转义）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url_u8F6C_u4E49"><span class="nav-number">4.</span> <span class="nav-text">url转义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url_u7F16_u7801_u65B9_u6CD5"><span class="nav-number">4.1.</span> <span class="nav-text">url编码方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#escape_28_29"><span class="nav-number">4.1.1.</span> <span class="nav-text">escape()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encodeURI_28_29"><span class="nav-number">4.1.2.</span> <span class="nav-text">encodeURI()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encodeURIComponent_28_29"><span class="nav-number">4.1.3.</span> <span class="nav-text">encodeURIComponent()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5199_u5728_u6700_u540E"><span class="nav-number">5.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
