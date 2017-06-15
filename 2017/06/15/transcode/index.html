@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTP,计算机网络," />
+  <meta name="keywords" content="javascript,web," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~">
+<meta name="description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="get和post的区别">
-<meta property="og:url" content="http://xxxbw.github.io/2016/08/01/get-post/index.html">
+<meta property="og:title" content="前端转义">
+<meta property="og:url" content="http://xxxbw.github.io/2017/06/15/transcode/index.html">
 <meta property="og:site_name" content="xxxBW's blog">
-<meta property="og:description" content="摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~">
-<meta property="og:updated_time" content="2016-08-01T14:24:02.702Z">
+<meta property="og:description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。">
+<meta property="og:updated_time" content="2017-06-15T16:42:22.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="get和post的区别">
-<meta name="twitter:description" content="摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~">
+<meta name="twitter:title" content="前端转义">
+<meta name="twitter:description" content="摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> get和post的区别 | xxxBW's blog </title>
+  <title> 前端转义 | xxxBW's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -202,7 +202,7 @@
             
             
               
-                get和post的区别
+                前端转义
               
             
           </h1>
@@ -214,8 +214,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T22:12:04+08:00" content="2016-08-01">
-              2016-08-01
+            <time itemprop="dateCreated" datetime="2017-06-15T23:47:51+08:00" content="2017-06-15">
+              2017-06-15
             </time>
           </span>
 
@@ -225,8 +225,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/01/get-post/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/get-post/" itemprop="commentsCount"></span>
+                <a href="/2017/06/15/transcode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/15/transcode/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -237,7 +237,7 @@
           &nbsp; | &nbsp;  
           阅读次数
           
-          <span id="/2016/08/01/get-post/"class="leancloud_visitors"  data-flag-title="get和post的区别">
+          <span id="/2017/06/15/transcode/"class="leancloud_visitors"  data-flag-title="前端转义">
                
             </span>
           
@@ -252,40 +252,24 @@
       
 
       
-        <p>摘要：get和post，我们在平时项目中经常用到，有时我们会被问到get和post有什么区别，一开始被问到的时候会挺懵逼的，除了字面理解之外，好像也不是很了解到底是什么区别？下面我来说说我对get和post的区别的理解~<br><a id="more"></a></p>
-<p>以前我师兄问过我这么一个问题</p>
-<ul>
-<li>Q : get和post有什么区别？</li>
-<li>A ：一个是用于取数据，一个是用于修改数据</li>
-<li>Q : 还有吗？</li>
-<li>A : 好像就这么多。。</li>
-</ul>
-<p>然而我的回答他好像不是很满意，那时候确实是我对get和post的理解还不够，之后做了整理，才发现原来这才是答案~</p>
-<p>HTTP与服务器交互的方法有4种：get、post、put、delete，这4种方法其实就对应了对资源的查、改、增、删这4个操作。不过平时我们用的话都是用get和post方法，用这两个方法就能完成所有的操作啦。</p>
-<p>那get和post到底有什么区别呢？这个问题很多同学在面试的时候都会被问到，也是一个十分经典的问题，这里我来说说我自己对get和post的区别的看法~</p>
-<h2 id="1-_u539F_u7406_u533A_u522B"><a href="#1-_u539F_u7406_u533A_u522B" class="headerlink" title="1.原理区别"></a>1.原理区别</h2><p>get是用于获取数据<br>这里的获取数据对应我们前面说到的对资源的查找操作，这个操作是安全而且幂等的，这里的安全是指这里是用于获取信息而不是修改信息，不会产生其他影响，而幂等则表现为对同个URL的多个请求都返回同样的结果。</p>
-<p>post表示可能修改服务器资源</p>
-<h2 id="HTTP_u5305_u7ED3_u6784"><a href="#HTTP_u5305_u7ED3_u6784" class="headerlink" title="HTTP包结构"></a>HTTP包结构</h2><p>这里我们先来看一下HTTP包结构</p>
-<h3 id="HTTP_u8BF7_u6C42_uFF1A"><a href="#HTTP_u8BF7_u6C42_uFF1A" class="headerlink" title="HTTP请求："></a>HTTP请求：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;request line&#62;    // &#35831;&#27714;&#34892;&#65306;&#35831;&#27714;&#31867;&#22411;&#12289;&#35201;&#35775;&#38382;&#30340;&#36164;&#28304;&#20197;&#21450;HTTP&#29256;&#26412;&#10;&#60;headers&#62;    // &#35831;&#27714;&#22836;&#65306;&#35828;&#26126;&#26381;&#21153;&#22120;&#35201;&#20351;&#29992;&#30340;&#38468;&#21152;&#20449;&#24687;&#10;&#60;blank line&#62;    // &#31354;&#34892;&#10;&#60;request-body&#62;    //&#35831;&#27714;&#20307;&#65306;&#20219;&#24847;&#20854;&#20182;&#25968;&#25454;</span><br></pre></td></tr></table></figure>
-<h3 id="HTTP_u54CD_u5E94_uFF1A"><a href="#HTTP_u54CD_u5E94_uFF1A" class="headerlink" title="HTTP响应："></a>HTTP响应：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;status line&#62;    //&#29366;&#24577;&#34892;&#65306;&#29366;&#24577;&#30721;&#34920;&#31034;&#21709;&#24212;&#29366;&#24577;&#10;&#60;headers&#62;    // &#21709;&#24212;&#22836;&#65306;&#26381;&#21153;&#22120;&#36820;&#22238;&#35831;&#27714;&#22836;&#20013;&#38656;&#35201;&#30340;&#20449;&#24687;&#10;&#60;blank line&#62;    // &#31354;&#34892;&#10;&#60;response-body&#62;    // &#21709;&#24212;&#20307;&#65306;&#35831;&#27714;&#36820;&#22238;&#30340;&#25968;&#25454;</span><br></pre></td></tr></table></figure>
-<h2 id="u5E38_u89C1_u7684_u72B6_u6001_u7801_uFF1A"><a href="#u5E38_u89C1_u7684_u72B6_u6001_u7801_uFF1A" class="headerlink" title="常见的状态码："></a>常见的状态码：</h2><ul>
-<li>200（OK）：找到资源，正常返回</li>
-<li>301（Move Permanently）：该资源被永久的改变了位置，通常会发送header来重定向到新的位置</li>
-<li>302（Found）：该资源被临时改变了位置，通常会发送header来临时重定向到新的位置</li>
-<li>304（Not Modified）：该资源上次请求之后没有任何修改，使用上次缓存的资源，用于浏览器缓存机制</li>
-<li>404（NOT FOUND）：在指定位置没找到该资源</li>
-<li>500（Internal Server Error）：服务器程序码出错</li>
-</ul>
-<p>看完了HTTP包结构之后，我们再来看看get和post的其他区别</p>
-<h2 id="2-_u53C2_u6570_u4F4D_u7F6E"><a href="#2-_u53C2_u6570_u4F4D_u7F6E" class="headerlink" title="2.参数位置"></a>2.参数位置</h2><p>get请求的数据附在URL之后，即HTTP协议头，以？分割url和传送数据，用&amp;连接多个参数，数据如果是英文或者数字，则原样发送，空格转换为+，其他则转换为base64编码</p>
-<p>post请求把数据则在HTTP请求包体中，以键值对的形式传送</p>
-<h2 id="3-_u7F13_u5B58_u673A_u5236"><a href="#3-_u7F13_u5B58_u673A_u5236" class="headerlink" title="3.缓存机制"></a>3.缓存机制</h2><p>get请求能够被缓存，请求会保存到浏览器的浏览记录中</p>
-<p>post并不能被缓存</p>
-<h2 id="4-_u4F20_u8F93_u6570_u636E_u957F_u5EA6"><a href="#4-_u4F20_u8F93_u6570_u636E_u957F_u5EA6" class="headerlink" title="4.传输数据长度"></a>4.传输数据长度</h2><p>get没有长度限制，因为HTTP请求没有限制URL长度，但是浏览器有限制URL长度，例如IE限制的长度为2k(2048字节)</p>
-<p>post请求数据长度浏览器这边没有限制，但是服务器那边会对提交数据大小进行限制</p>
-<h2 id="5-_u5B89_u5168_u6027"><a href="#5-_u5B89_u5168_u6027" class="headerlink" title="5.安全性"></a>5.安全性</h2><p>get请求数据使用base64编码，显示在URL中可能造成CSRF攻击</p>
-<p>post数据存放在request-body中，相对来说比较安全</p>
-
+        <p>摘要：前端转义，平常用的时候感觉不多，因为没有bug，所以不会去注意到转义，但其实说起来还是需要整理熟悉一下，因为没有转义轻则破坏原有结构，重则造成XSS攻击，所以前端转义还是很有必要的。<br><a id="more"></a></p>
+<h2 id="u8F6C_u4E49_u7C7B_u578B"><a href="#u8F6C_u4E49_u7C7B_u578B" class="headerlink" title="转义类型"></a>转义类型</h2><p>前端的转义有三种：<br>1.HTML转义<br>2.javascript转义（json转义）<br>3.url转义</p>
+<h2 id="HTML_u8F6C_u4E49"><a href="#HTML_u8F6C_u4E49" class="headerlink" title="HTML转义"></a>HTML转义</h2><p>HTML转义就是把HTML中的特殊字符利用转义字符进行表示。常用的转义字符如下表，”和’用于给变量赋值，&amp;用于转义，&lt;和&gt;用于HTM标签。<br>|字符|十进制|转义字符|<br>|”|&amp;#34|&quot;|<br>|’|&amp;#39|&apos;|<br>|&amp;|&amp;#38|&amp;|<br>|&lt;|&amp;#60|&lt;|<br>|&gt;|&amp;#62|&gt;|<br>|不断开空格|&amp;#160|&nbsp;|</p>
+<p>举个例子，当输出到页面的字符串中带有</p><h1>标签的时候，会发生什么情况？<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"xx"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></span><br><span class="line">var content = '<span class="tag">&lt;<span class="title">h1</span>&gt;</span>这里是h1<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>';</span><br><span class="line">$('#xx').text(content); // 正确</span><br><span class="line">$('#xx').html(content); // 错误</span><br><span class="line">document.getElementById('xx').innerHTML = content; // 错误</span><br></pre></td></tr></table></figure><p></p>
+<p>上面的写法没有对&lt;&gt;进行转义，导致将content设置为html的时候会出现</p><h1>标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。<p></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对str字符串进行html转义</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">html_encode</span>(<span class="params">str</span>) </span>&#123;   </span><br><span class="line">	<span class="keyword">var</span> s = <span class="string">""</span>;   </span><br><span class="line">	<span class="keyword">if</span> (str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;   </span><br><span class="line">	s = str.replace(<span class="regexp">/&amp;/g</span>, <span class="string">"&amp;gt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&amp;lt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/&gt;/g</span>, <span class="string">"&amp;gt;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/ /g</span>, <span class="string">"&amp;nbsp;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\'/g</span>, <span class="string">"&amp;#39;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\"/g</span>, <span class="string">"&amp;quot;"</span>);   </span><br><span class="line">	s = s.replace(<span class="regexp">/\n/g</span>, <span class="string">"&lt;br&gt;"</span>);   </span><br><span class="line">	<span class="keyword">return</span> s;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">var</span> encodeContent = html_encode(content);</span><br><span class="line">$(<span class="string">'#xx'</span>).html(encodeContent); <span class="comment">// 正确</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xx'</span>).innerHTML = encodeContent; <span class="comment">// 正确</span></span><br></pre></td></tr></table></figure>
+<h2 id="javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09"><a href="#javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09" class="headerlink" title="javascript转义（json转义）"></a>javascript转义（json转义）</h2><p>javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。<br>|转义字符|代码|<br>|–|–|<br>|’|\’|<br>|”|\”|<br>|&amp;|\&amp;|<br>||\|<br>|换行符|\n|<br>|回车符|\r|<br>|制表符|\t|<br>|退格符|\b|<br>|换页符|\f|</p>
+<p>javascript转义经常会在定义字符串的时候遇到。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ret = 'dont't click me'; // 报错</span><br><span class="line">var ret = 'dont\'t click me'; // 正确</span><br></pre></td></tr></table></figure></p>
+<h2 id="url_u8F6C_u4E49"><a href="#url_u8F6C_u4E49" class="headerlink" title="url转义"></a>url转义</h2><blockquote>
+<p>url只能使用英文字母，阿拉伯数字和某些标点符号，其他符号需要编码后才能使用。</p>
+</blockquote>
+<p>浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而<br>ie8以下是使用GB 2312编码。<br>另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。</p>
+<p>为了编码一致，我们可以在请求之前对url进行编码，实现编码统一。</p>
+<h3 id="url_u7F16_u7801_u65B9_u6CD5"><a href="#url_u7F16_u7801_u65B9_u6CD5" class="headerlink" title="url编码方法"></a>url编码方法</h3><p>目前，javascript提供的url编码方法有一下三种<br>1.escape()<br>2.encodeURI()<br>3.encodeURIComponent()</p>
+<h4 id="escape_28_29"><a href="#escape_28_29" class="headerlink" title="escape()"></a>escape()</h4><p>将url转化为Unicode的形式</p>
+<h4 id="encodeURI_28_29"><a href="#encodeURI_28_29" class="headerlink" title="encodeURI()"></a>encodeURI()</h4><p>除了常见的符号以外，对其他一些在网址中有特殊含义的符号”; / ? : @ &amp; = + $ , #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。</p>
+<h4 id="encodeURIComponent_28_29"><a href="#encodeURIComponent_28_29" class="headerlink" title="encodeURIComponent()"></a>encodeURIComponent()</h4><p>在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码</p>
+</h1></h1>
       
     </div>
 
@@ -293,9 +277,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTTP/" rel="tag">#HTTP</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
-            <a href="/tags/计算机网络/" rel="tag">#计算机网络</a>
+            <a href="/tags/web/" rel="tag">#web</a>
           
         </div>
       
@@ -304,17 +288,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/31/seajs-module/" rel="next" title="seajs源码解析--module">
-                <i class="fa fa-chevron-left"></i> seajs源码解析--module
+              <a href="/2016/10/26/this/" rel="next" title="this关键字">
+                <i class="fa fa-chevron-left"></i> this关键字
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/25/strict/" rel="prev" title="严格模式 vs 混杂模式">
-                严格模式 vs 混杂模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -340,8 +320,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/01/get-post/"
-           data-title="get和post的区别" data-url="http://xxxbw.github.io/2016/08/01/get-post/">
+      <div class="ds-thread" data-thread-key="2017/06/15/transcode/"
+           data-title="前端转义" data-url="http://xxxbw.github.io/2017/06/15/transcode/">
       </div>
     
   </div>
@@ -429,7 +409,34 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_u539F_u7406_u533A_u522B"><span class="nav-number">1.</span> <span class="nav-text">1.原理区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP_u5305_u7ED3_u6784"><span class="nav-number">2.</span> <span class="nav-text">HTTP包结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP_u8BF7_u6C42_uFF1A"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP请求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP_u54CD_u5E94_uFF1A"><span class="nav-number">2.2.</span> <span class="nav-text">HTTP响应：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5E38_u89C1_u7684_u72B6_u6001_u7801_uFF1A"><span class="nav-number">3.</span> <span class="nav-text">常见的状态码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-_u53C2_u6570_u4F4D_u7F6E"><span class="nav-number">4.</span> <span class="nav-text">2.参数位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-_u7F13_u5B58_u673A_u5236"><span class="nav-number">5.</span> <span class="nav-text">3.缓存机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-_u4F20_u8F93_u6570_u636E_u957F_u5EA6"><span class="nav-number">6.</span> <span class="nav-text">4.传输数据长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-_u5B89_u5168_u6027"><span class="nav-number">7.</span> <span class="nav-text">5.安全性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u8F6C_u4E49_u7C7B_u578B"><span class="nav-number">1.</span> <span class="nav-text">转义类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML_u8F6C_u4E49"><span class="nav-number">2.</span> <span class="nav-text">HTML转义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">标签的时候，会发生什么情况？12345<div id="xx"></div>var content = '<h1>这里是h1</h1>';$('#xx').text(content); // 正确$('#xx').html(content); // 错误document.getElementById('xx').innerHTML = content; // 错误
+上面的写法没有对<>进行转义，导致将content设置为html的时候会出现标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。
+12345678910111213141516// 对str字符串进行html转义function html_encode(str) {   	var s = "";   	if (str.length == 0) return "";   	s = str.replace(/&/g, "&gt;");   	s = s.replace(/</g, "&lt;");   	s = s.replace(/>/g, "&gt;");   	s = s.replace(/ /g, "&nbsp;");   	s = s.replace(/\'/g, "&#39;");   	s = s.replace(/\"/g, "&quot;");   	s = s.replace(/\n/g, "<br>");   	return s;   }   var encodeContent = html_encode(content);$('#xx').html(encodeContent); // 正确document.getElementById('xx').innerHTML = encodeContent; // 正确
+javascript转义（json转义）javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。|转义字符|代码||–|–||’|\’||”|\”||&|\&|||\||换行符|\n||回车符|\r||制表符|\t||退格符|\b||换页符|\f|
+javascript转义经常会在定义字符串的时候遇到。12var ret = 'dont't click me'; // 报错var ret = 'dont\'t click me'; // 正确
+url转义
+url只能使用英文字母，阿拉伯数字和某些标点符号，其他符号需要编码后才能使用。
+
+浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而ie8以下是使用GB 2312编码。另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。
+为了编码一致，我们可以在请求之前对url进行编码，实现编码统一。
+url编码方法目前，javascript提供的url编码方法有一下三种1.escape()2.encodeURI()3.encodeURIComponent()
+escape()将url转化为Unicode的形式
+encodeURI()除了常见的符号以外，对其他一些在网址中有特殊含义的符号”; / ? : @ & = + $ , #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
+encodeURIComponent()在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码
+</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">标签在html中进行了解析。下面，定义html_encode方法对str进行html转义，然后再把字符串作为html的内容，这样就不会出现标签被解析的情况。
+12345678910111213141516// 对str字符串进行html转义function html_encode(str) {   	var s = "";   	if (str.length == 0) return "";   	s = str.replace(/&/g, "&gt;");   	s = s.replace(/</g, "&lt;");   	s = s.replace(/>/g, "&gt;");   	s = s.replace(/ /g, "&nbsp;");   	s = s.replace(/\'/g, "&#39;");   	s = s.replace(/\"/g, "&quot;");   	s = s.replace(/\n/g, "<br>");   	return s;   }   var encodeContent = html_encode(content);$('#xx').html(encodeContent); // 正确document.getElementById('xx').innerHTML = encodeContent; // 正确
+javascript转义（json转义）javascript转义比较简单，就是把特殊字符转成转义字符，常用的转义字符如下表。|转义字符|代码||–|–||’|\’||”|\”||&|\&|||\||换行符|\n||回车符|\r||制表符|\t||退格符|\b||换页符|\f|
+javascript转义经常会在定义字符串的时候遇到。12var ret = 'dont't click me'; // 报错var ret = 'dont\'t click me'; // 正确
+url转义
+url只能使用英文字母，阿拉伯数字和某些标点符号，其他符号需要编码后才能使用。
+
+浏览器会自动对url进行编码，不过各个浏览器使用的编码方法各异。目前大部分浏览器对url路径中的中文采用utf-8编码，对于url中的参数，大部分浏览器使用utf-8，而ie8以下是使用GB 2312编码。另外一个点就是get请求中空格会被转变为+，但是在post请求中空格是可以直接传给后台的。
+为了编码一致，我们可以在请求之前对url进行编码，实现编码统一。
+url编码方法目前，javascript提供的url编码方法有一下三种1.escape()2.encodeURI()3.encodeURIComponent()
+escape()将url转化为Unicode的形式
+encodeURI()除了常见的符号以外，对其他一些在网址中有特殊含义的符号”; / ? : @ & = + $ , #”，也不进行编码。编码后，它输出符号的utf-8形式，并且在每个字节前加上%。
+encodeURIComponent()在encodeURI()中不被编码的符号，在encodeURIComponent()中统统会被编码
+</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript_u8F6C_u4E49_uFF08json_u8F6C_u4E49_uFF09"><span class="nav-number">1.</span> <span class="nav-text">javascript转义（json转义）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url_u8F6C_u4E49"><span class="nav-number">2.</span> <span class="nav-text">url转义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url_u7F16_u7801_u65B9_u6CD5"><span class="nav-number">2.1.</span> <span class="nav-text">url编码方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#escape_28_29"><span class="nav-number">2.1.1.</span> <span class="nav-text">escape()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encodeURI_28_29"><span class="nav-number">2.1.2.</span> <span class="nav-text">encodeURI()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encodeURIComponent_28_29"><span class="nav-number">2.1.3.</span> <span class="nav-text">encodeURIComponent()</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
